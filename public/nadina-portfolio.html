@@ -193,7 +193,7 @@
     font-family: "Great Vibes", "Marck Script", "Snell Roundhand", "Apple Chancery", cursive;
     font-weight: 400; font-size: clamp(2.3rem, 5vw, 4.4rem); line-height: 1.15; letter-spacing: 0; }
   .contact .h2 .w { padding: .12em .12em .28em; margin: -.12em -.12em -.28em; }
-  .cline { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; row-gap: 8px; margin-top: clamp(20px, 3vw, 32px); }
+  .cline { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; column-gap: 36px; row-gap: 8px; margin-top: clamp(20px, 3vw, 32px); }
   .citem { display: inline-flex; align-items: center; gap: 9px; padding: 6px 2px; font-size: clamp(1rem, 1.3vw, 1.12rem); color: var(--text); }
   
   .citem span { background: linear-gradient(currentColor, currentColor) 0 100% / 0 1px no-repeat; transition: background-size .45s var(--ease); padding-bottom: 2px; }
@@ -204,10 +204,8 @@
   .citem:hover span { background-size: 100% 1px; }
   .citem:hover .arr { transform: translate(2px, -2px); opacity: 1; }
   .citem:hover .ico { color: var(--text); }
-  .citem + .citem::before { content: ""; width: 4px; height: 4px; border-radius: 50%; background: var(--muted); opacity: .6; margin: 0 20px; align-self: center; }
   @media (max-width: 760px) {
     .cline { flex-direction: column; row-gap: 2px; }
-    .citem + .citem::before { display: none; }
   }
   .contact .sub { margin-inline: auto; }
   /* контакты: редакционный список, как у дизайн-агентств */
