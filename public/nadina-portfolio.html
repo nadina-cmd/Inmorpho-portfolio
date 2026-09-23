@@ -608,7 +608,7 @@ const projects = [
   },
   {
     category: "brand", badge: "spec", media: "", video: "miumiu", coverImg: "miumiu-cover", ratio: "9 / 16", vertical: true, flip: true, tone: "rgba(190,40,40,.3)",
-    tools: ["Midjourney", "Seedance 2.5", "Kling", "Nano Banana", "GPT Image"],
+    tools: ["Midjourney", "Kling", "Nano Banana"],
     ru: { title: "Miu Miu", format: "Бэкстейдж, 26 секунд",
           desc: "Мой эксперимент с форматом. Закулисье съёмки, которой не было. Эскалаторы метро, свет, камера и финальный образ в красном кружеве и очках Miu Miu. Съёмочную группу я тоже создала в нейросетях." },
     en: { title: "Miu Miu", format: "AI backstage, 26 seconds",
@@ -1002,7 +1002,7 @@ if (up.getAttribute("href") === "#") { up.classList.add("soon"); up.setAttribute
 let saved = null;
 try { saved = localStorage.getItem("lang"); } catch (e) {}
 fitScrollPadding();
-setLang(saved || ((navigator.language || "").toLowerCase().startsWith("ru") ? "ru" : "en"));
+setLang(saved || "en");
 if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => moveIndicator(false));
 </script>
 </body>
