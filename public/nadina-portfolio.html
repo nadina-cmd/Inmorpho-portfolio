@@ -340,6 +340,7 @@
   @media (max-width: 760px) { .case.vertical { display: block; } .case.vertical .case-meta { margin-top: 18px; } .case.vertical .frame { aspect-ratio: 4 / 5 !important; } }
 
   /* серия: три вертикальных видео */
+  .triptych-wrap { position: relative; }
   .triptych { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; }
   .case .triptych .frame { aspect-ratio: 9 / 16; }
   .triptych .play-btn { left: 14px; bottom: 14px; padding: 8px 14px 8px 8px; font-size: .85rem; }
@@ -349,6 +350,37 @@
     .triptych::-webkit-scrollbar { display: none; }
     .triptych .frame { flex: 0 0 56%; scroll-snap-align: start; }
   }
+
+  /* стрелки прокрутки серии */
+  .tri-arrow {
+    position: absolute; top: 50%; z-index: 3; display: none;
+    width: 40px; height: 40px; border-radius: 50%; border: 0; cursor: pointer;
+    align-items: center; justify-content: center; color: #fff;
+    background: rgba(255,255,255,.14); backdrop-filter: blur(14px) saturate(160%); -webkit-backdrop-filter: blur(14px) saturate(160%);
+    box-shadow: inset 0 0 0 1px rgba(255,255,255,.22);
+    opacity: 0; pointer-events: none;
+    transition: opacity .4s var(--ease), background .3s var(--ease);
+  }
+  .tri-arrow svg { width: 16px; height: 16px; }
+  .tri-arrow.show { display: flex; opacity: .8; pointer-events: auto; }
+  .tri-arrow.show:hover { opacity: 1; background: rgba(255,255,255,.26); }
+  .tri-prev { left: 8px; transform: translateY(-50%); animation: triNudgeLeft 2.6s ease-in-out infinite; }
+  .tri-next { right: 8px; transform: translateY(-50%); animation: triNudgeRight 2.6s ease-in-out infinite; }
+  @keyframes triNudgeLeft { 0%, 100% { transform: translateY(-50%) translateX(0); } 50% { transform: translateY(-50%) translateX(-3px); } }
+  @keyframes triNudgeRight { 0%, 100% { transform: translateY(-50%) translateX(0); } 50% { transform: translateY(-50%) translateX(3px); } }
+  @media (min-width: 761px) { .tri-arrow { display: none !important; } }
+  @media (prefers-reduced-motion: reduce) { .tri-arrow { animation: none; } }
+
+  /* фильтр категорий */
+  .cat-filters { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 16px; }
+  .cat-pill {
+    font: inherit; font-size: .82rem; font-weight: 500; letter-spacing: .01em;
+    padding: 7px 16px; border-radius: 999px; border: 1px solid var(--line);
+    background: transparent; color: var(--muted); cursor: pointer;
+    transition: color .3s var(--ease), border-color .3s var(--ease), background .3s var(--ease);
+  }
+  .cat-pill:hover { color: var(--text); border-color: rgba(0,0,0,.25); }
+  .cat-pill[aria-pressed="true"] { background: var(--text); border-color: var(--text); color: #fff; }
 
   /* просмотр со звуком */
   .lb { position: fixed; inset: 0; z-index: 90; display: flex; align-items: center; justify-content: center; padding: 24px;
@@ -498,7 +530,7 @@
   <section id="work">
     <div class="wrap">
       <h2 class="h2" data-split="rise" data-i18n="work.title">Stories</h2>
-      <p class="sub" data-reveal data-i18n="work.sub"></p>
+      <div class="cat-filters" id="catFilters" data-reveal role="group" aria-label="Filter by category"></div>
 
       <div class="cases" id="cases"></div>
     </div>
@@ -675,10 +707,11 @@ function renderCases() {
     const badge = p.badge && badges[p.badge] ? `<span class="badge">${badges[p.badge][lang]}</span>` : "";
     const tools = p.tools.length
       ? `<p class="tools-label">${dict[lang]["case.tools"]}</p><ul class="tools">${p.tools.map(x => `<li>${x}</li>`).join("")}</ul>` : "";
+    const arrowIcon = (dir) => `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="${dir === "prev" ? "15 18 9 12 15 6" : "9 18 15 12 9 6"}"></polyline></svg>`;
     casesEl.insertAdjacentHTML("beforeend", `
-      <article class="case${p.vertical ? " vertical" : ""}${p.flip ? " flip" : ""}">
+      <article class="case${p.vertical ? " vertical" : ""}${p.flip ? " flip" : ""}" data-category="${p.category}">
         ${p.series
-          ? `<div class="triptych">${p.series.map(x => `<div class="frame iris"><video class="case-video" data-vid="${x.id}" muted loop playsinline preload="none"></video><button class="play-btn" type="button" data-vid="${x.id}" data-series="${seriesIds.join(",")}" aria-label="${dict[lang]["case.watch"]}: ${x.name}"><i></i>${x.name}</button></div>`).join("")}</div>`
+          ? `<div class="triptych-wrap"><div class="triptych">${p.series.map(x => `<div class="frame iris"><video class="case-video" data-vid="${x.id}" muted loop playsinline preload="none"></video><button class="play-btn" type="button" data-vid="${x.id}" data-series="${seriesIds.join(",")}" aria-label="${dict[lang]["case.watch"]}: ${x.name}"><i></i>${x.name}</button></div>`).join("")}</div><button class="tri-arrow tri-prev" type="button" aria-label="Previous">${arrowIcon("prev")}</button><button class="tri-arrow tri-next" type="button" aria-label="Next">${arrowIcon("next")}</button></div>`
           : `<div class="frame iris"${p.ratio ? ` style="aspect-ratio:${p.ratio}"` : ""}>${media}</div>`}
         <div class="case-meta" data-reveal style="--d:.15s">
           <div><p class="case-type">${cat}${badge}</p><h3 class="case-title">${t.title}</h3><p class="case-format">${t.format}</p></div>
@@ -688,7 +721,49 @@ function renderCases() {
   });
   casesEl.querySelectorAll(".case-video").forEach(v => { setVideo(v, v.dataset.vid, false); watchVideo(v); });
   casesEl.querySelectorAll(".play-btn").forEach(b => b.addEventListener("click", () => openLightbox(b.dataset.vid, b.dataset.series ? b.dataset.series.split(",") : null)));
+  wireTriptychArrows();
+  applyFilter();
   armReveal(casesEl.querySelectorAll(".iris, [data-reveal]"));
+}
+function wireTriptychArrows() {
+  casesEl.querySelectorAll(".triptych-wrap").forEach(wrap => {
+    const track = wrap.querySelector(".triptych");
+    const prev = wrap.querySelector(".tri-prev");
+    const next = wrap.querySelector(".tri-next");
+    if (!track || !prev || !next) return;
+    const update = () => {
+      const max = track.scrollWidth - track.clientWidth;
+      prev.classList.toggle("show", track.scrollLeft > 28);
+      next.classList.toggle("show", track.scrollLeft < max - 28);
+    };
+    track.addEventListener("scroll", update, { passive: true });
+    window.addEventListener("resize", update);
+    prev.addEventListener("click", () => track.scrollBy({ left: -track.clientWidth * 0.8, behavior: "smooth" }));
+    next.addEventListener("click", () => track.scrollBy({ left: track.clientWidth * 0.8, behavior: "smooth" }));
+    update();
+  });
+}
+/* ===== Фильтр категорий над "Историями" ===== */
+let activeCategory = "all";
+const catFiltersEl = document.getElementById("catFilters");
+function renderCatFilters() {
+  const cats = [...new Set(projects.map(p => p.category))];
+  catFiltersEl.innerHTML = ["all", ...cats].map(c => {
+    const label = c === "all" ? dict[lang]["work.all"] : ((categories[c] || {})[lang] || c);
+    return `<button type="button" class="cat-pill" data-cat="${c}" aria-pressed="${c === activeCategory}">${label}</button>`;
+  }).join("");
+  catFiltersEl.querySelectorAll(".cat-pill").forEach(btn => {
+    btn.addEventListener("click", () => {
+      activeCategory = btn.dataset.cat;
+      renderCatFilters();
+      applyFilter();
+    });
+  });
+}
+function applyFilter() {
+  casesEl.querySelectorAll(".case").forEach(el => {
+    el.style.display = (activeCategory === "all" || el.dataset.category === activeCategory) ? "" : "none";
+  });
 }
 /* превью играет, только когда видно на экране */
 const vidIO = "IntersectionObserver" in window ? new IntersectionObserver(es => es.forEach(e => {
@@ -749,6 +824,7 @@ const dict = {
     "tk.sub": "Под каждую задачу подбираю свою модель и связку инструментов.",
     "work.title": "Истории",
     "work.sub": "Бренд-фильмы, короткометражки и фильмы-настроения, созданные в нейросетях.",
+    "work.all": "Все",
     "case.ph": "Кадр проекта", "case.hint": "16:9, JPG, PNG или MP4",
     "case.desc": "Одна-две строки о задаче и результате: для кого, что нужно было показать, что получилось.",
     "case.tools": "Инструменты", "case.watch": "Смотреть со звуком", "case.toolsVal": "укажите нейросети и софт",
@@ -781,6 +857,7 @@ const dict = {
     "tk.sub": "I match the model and the toolchain to each brief.",
     "work.title": "Stories",
     "work.sub": "Brand films, storytelling and mood films, created with AI.",
+    "work.all": "All",
     "case.ph": "Project still", "case.hint": "16:9, JPG, PNG or MP4",
     "case.desc": "One or two lines on the brief and the result: who it was for, what had to be shown, what came out.",
     "case.tools": "Tools", "case.watch": "Watch with sound", "case.toolsVal": "list the models and software",
@@ -830,7 +907,7 @@ function setLang(l) {
   document.querySelectorAll(".lang button").forEach(b =>
     b.setAttribute("aria-pressed", String(b.dataset.lang === lang)));
   try { localStorage.setItem("lang", lang); } catch (e) {}
-  if (renderedLang !== lang) { renderCases(); renderToolkit(); renderedLang = lang; }
+  if (renderedLang !== lang) { renderCatFilters(); renderCases(); renderToolkit(); renderedLang = lang; }
   moveIndicator(false);
   requestUpdate();
 }
