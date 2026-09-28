@@ -368,7 +368,7 @@
   .tri-next { right: 8px; transform: translateY(-50%); animation: triNudgeRight 2.6s ease-in-out infinite; }
   @keyframes triNudgeLeft { 0%, 100% { transform: translateY(-50%) translateX(0); } 50% { transform: translateY(-50%) translateX(-3px); } }
   @keyframes triNudgeRight { 0%, 100% { transform: translateY(-50%) translateX(0); } 50% { transform: translateY(-50%) translateX(3px); } }
-  @media (min-width: 761px) { .tri-arrow { display: none !important; } }
+  @media (min-width: 761px) { .triptych-wrap .tri-arrow { display: none !important; } }
   @media (prefers-reduced-motion: reduce) { .tri-arrow { animation: none; } }
 
   /* фильтр категорий */
@@ -381,6 +381,19 @@
   }
   .cat-pill:hover { color: var(--text); border-color: rgba(0,0,0,.25); }
   .cat-pill[aria-pressed="true"] { background: var(--text); border-color: var(--text); color: #fff; }
+
+  /* фотогалерея: одно фото на экран, листание */
+  .photo-gallery { isolation: isolate; }
+  .pg-track { position: absolute; inset: 0; display: flex; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; }
+  .pg-track::-webkit-scrollbar { display: none; }
+  .pg-slide { flex: 0 0 100%; height: 100%; scroll-snap-align: start; }
+  .pg-counter {
+    position: absolute; left: 20px; bottom: 20px; z-index: 2;
+    padding: 8px 14px; border-radius: 999px;
+    font-size: .85rem; font-weight: 500; color: #fff;
+    background: rgba(255,255,255,.16); backdrop-filter: blur(16px) saturate(160%); -webkit-backdrop-filter: blur(16px) saturate(160%);
+    box-shadow: inset 0 0 0 1px rgba(255,255,255,.22);
+  }
 
   /* просмотр со звуком */
   .lb { position: fixed; inset: 0; z-index: 90; display: flex; align-items: center; justify-content: center; padding: 24px;
@@ -614,6 +627,16 @@ function setVideo(el, id, autoplay) {
    tools:    инструменты именно этого проекта — оставь только те, что использовала */
 const projects = [
   {
+    category: "photo", badge: "spec", media: "",
+    photos: ["rosalia-1-ballerina.webp", "rosalia-4-floor.webp", "rosalia-5-feather-headpiece.webp", "rosalia-6-flying-feathers-portrait.jpg", "rosalia-7-flying-feathers-full.webp"],
+    ratio: "4 / 5", tone: "rgba(120,120,130,.28)",
+    tools: ["Midjourney"],
+    ru: { title: "Rosalía", format: "AI-фотосессия по мотивам тура LUX, 7 кадров",
+          desc: "Альбом LUX Росалии — путь от земного к небесному через веру и трансформацию. Я взяла свет как главный инструмент серии.<br><br>Все кадры полностью созданы в нейросетях. Это моя авторская интерпретация и благодарность за музыку, которую хочется видеть." },
+    en: { title: "Rosalía", format: "AI photoshoot inspired by the LUX tour, 7 frames",
+          desc: "Rosalía's LUX album traces a journey from the earthly to the celestial, through faith and transformation. I used light as the series' core tool.<br><br>Every frame is fully AI-generated. This is my own interpretation, a thank-you for music that asks to be seen." }
+  },
+  {
     category: "storytelling", badge: "personal", media: "", video: "le-smoking", cover: "le-smoking-cover", ratio: "4 / 3", tone: "rgba(200,200,200,.22)",
     tools: ["Midjourney", "Seedance 2.5", "Kling", "Nano Banana", "GPT Image"],
     ru: { title: "Le Smoking", format: "Историческая короткометражка, 1 минута",
@@ -661,7 +684,8 @@ const categories = {
   storytelling: { ru: "Короткометражка",  en: "Storytelling" },
   social:       { ru: "Reels и Shorts",   en: "Reels & Shorts" },
   homestaging:  { ru: "AI-визуализация интерьеров", en: "AI home staging" },
-  mood:         { ru: "Фильм-настроение", en: "Mood film" }
+  mood:         { ru: "Фильм-настроение", en: "Mood film" },
+  photo:        { ru: "AI-фото",          en: "AI Photo" }
 };
 const badges = {
   spec:     { ru: "Spec",      en: "Spec" },
@@ -712,6 +736,8 @@ function renderCases() {
       <article class="case${p.vertical ? " vertical" : ""}${p.flip ? " flip" : ""}" data-category="${p.category}">
         ${p.series
           ? `<div class="triptych-wrap"><div class="triptych">${p.series.map(x => `<div class="frame iris"><video class="case-video" data-vid="${x.id}" muted loop playsinline preload="none"></video><button class="play-btn" type="button" data-vid="${x.id}" data-series="${seriesIds.join(",")}" aria-label="${dict[lang]["case.watch"]}: ${x.name}"><i></i>${x.name}</button></div>`).join("")}</div><button class="tri-arrow tri-prev" type="button" aria-label="Previous">${arrowIcon("prev")}</button><button class="tri-arrow tri-next" type="button" aria-label="Next">${arrowIcon("next")}</button></div>`
+          : p.photos
+          ? `<div class="frame iris photo-gallery"${p.ratio ? ` style="aspect-ratio:${p.ratio}"` : ""}><div class="pg-track">${p.photos.map((f, i) => `<div class="pg-slide"><img src="media/work/${f}" alt="${t.title} ${i + 1}" loading="${i === 0 ? "eager" : "lazy"}"></div>`).join("")}</div><button class="tri-arrow tri-prev" type="button" aria-label="Previous">${arrowIcon("prev")}</button><button class="tri-arrow tri-next" type="button" aria-label="Next">${arrowIcon("next")}</button><span class="pg-counter">1 / ${p.photos.length}</span></div>`
           : `<div class="frame iris"${p.ratio ? ` style="aspect-ratio:${p.ratio}"` : ""}>${media}</div>`}
         <div class="case-meta" data-reveal style="--d:.15s">
           <div><p class="case-type">${cat}${badge}</p><h3 class="case-title">${t.title}</h3><p class="case-format">${t.format}</p></div>
@@ -726,20 +752,24 @@ function renderCases() {
   armReveal(casesEl.querySelectorAll(".iris, [data-reveal]"));
 }
 function wireTriptychArrows() {
-  casesEl.querySelectorAll(".triptych-wrap").forEach(wrap => {
-    const track = wrap.querySelector(".triptych");
+  casesEl.querySelectorAll(".triptych-wrap, .photo-gallery").forEach(wrap => {
+    const track = wrap.querySelector(".triptych, .pg-track");
     const prev = wrap.querySelector(".tri-prev");
     const next = wrap.querySelector(".tri-next");
+    const counter = wrap.querySelector(".pg-counter");
     if (!track || !prev || !next) return;
+    const paged = track.classList.contains("pg-track");
+    const step = paged ? track.clientWidth : track.clientWidth * 0.8;
     const update = () => {
       const max = track.scrollWidth - track.clientWidth;
       prev.classList.toggle("show", track.scrollLeft > 28);
       next.classList.toggle("show", track.scrollLeft < max - 28);
+      if (counter) counter.textContent = (Math.round(track.scrollLeft / track.clientWidth) + 1) + " / " + track.children.length;
     };
     track.addEventListener("scroll", update, { passive: true });
     window.addEventListener("resize", update);
-    prev.addEventListener("click", () => track.scrollBy({ left: -track.clientWidth * 0.8, behavior: "smooth" }));
-    next.addEventListener("click", () => track.scrollBy({ left: track.clientWidth * 0.8, behavior: "smooth" }));
+    prev.addEventListener("click", () => track.scrollBy({ left: -step, behavior: "smooth" }));
+    next.addEventListener("click", () => track.scrollBy({ left: step, behavior: "smooth" }));
     update();
   });
 }
