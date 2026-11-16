@@ -35,7 +35,7 @@
   html { scroll-behavior: smooth; scroll-padding-top: calc(env(safe-area-inset-top, 0px) + 80px); }
   *, *::before, *::after { box-sizing: inherit; margin: 0; }
   body {
-    background: linear-gradient(180deg, #f2f2f4 0%, var(--bg) 45%, #d9d9de 100%);
+    background: linear-gradient(180deg, #f2f2f4 0%, var(--bg) 45%, #c7c7cc 100%);
     color: var(--text);
     font: 100%/1.55 -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display", "Helvetica Neue", "Segoe UI", Roboto, Arial, sans-serif;
     -webkit-font-smoothing: antialiased;
@@ -175,20 +175,26 @@
   .fact p { color: var(--muted); text-wrap: pretty; }
   @media (max-width: 820px) { .about-grid { grid-template-columns: 1fr; } .portrait { aspect-ratio: 4 / 3; } .fact h3 { margin-bottom: 4px; } }
 
+  /* ===== КАК Я РАБОТАЮ ===== */
+  .steps { display: flex; align-items: stretch; gap: 0; margin-top: clamp(24px, 3.5vw, 44px); flex-wrap: wrap; }
+  .step { flex: 1 1 160px; background: var(--paper); border-radius: var(--radius-md); padding: 22px 20px; box-shadow: 0 16px 36px -26px rgba(0,0,0,.3); }
+  .step-num { display: block; font-size: 1.3rem; font-weight: 600; color: var(--accent); margin-bottom: 10px; }
+  .step h3 { font-size: 1.05rem; font-weight: 600; letter-spacing: -.01em; margin-bottom: 6px; }
+  .step p { color: var(--muted); font-size: .92rem; }
+  .step-arrow { flex: 0 0 28px; display: flex; align-items: center; justify-content: center; color: var(--muted); opacity: .55; }
+  .step-arrow svg { width: 18px; height: 18px; }
+  @media (max-width: 820px) {
+    .steps { flex-direction: column; gap: 2px; }
+    .step-arrow { flex-basis: 28px; transform: rotate(90deg); }
+  }
+  @media (min-width: 1024px) { .step h3 { font-size: 1.15rem; } .step p { font-size: 1rem; } }
+
   .cases { display: grid; grid-template-columns: 1fr; gap: 14px; margin-top: clamp(24px, 3.5vw, 44px); }
   @media (min-width: 640px) { .cases { grid-template-columns: repeat(2, 1fr); gap: 16px; } }
   @media (min-width: 1024px) { .cases { grid-template-columns: repeat(3, 1fr); gap: 18px; } }
-  .case .frame, .pm-media .frame { box-shadow: 0 30px 60px -36px rgba(0,0,0,.4); }
-  .case-meta { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 12px 48px; margin-top: 18px; }
   .case-type { color: var(--accent); font-size: .95rem; font-weight: 500; margin-bottom: 6px; }
   .case-title { font-size: clamp(1.45rem, 2.2vw, 1.9rem); font-weight: 500; line-height: 1.12; letter-spacing: -.025em; }
   .case-desc { color: var(--muted); font-size: 1rem; }
-  .case-tools { margin-top: 14px; font-size: .92rem; }
-  .case-tools span { color: var(--muted); }
-  @media (max-width: 760px) {
-    .case-meta { grid-template-columns: 1fr; }
-    .case .frame, .reel .frame { aspect-ratio: 4 / 5; }
-  }
 
   /* ===== РАБОТЫ: плитки матрицы ===== */
   .tile {
@@ -211,33 +217,55 @@
   @media (hover: none) { .tile-icon { opacity: 1; transform: none; } }
 
 
-  /* ===== ОКНО ПРОЕКТА ===== */
-  .pm { position: fixed; inset: 0; z-index: 85; display: flex; justify-content: center;
-    background: rgba(0,0,0,.6); backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
-    opacity: 0; visibility: hidden; transition: opacity .4s var(--ease), visibility 0s .4s;
-    overflow-y: auto; padding: 0; }
+  /* ===== ОКНО ПРОСМОТРА ===== */
+  .pm { position: fixed; inset: 0; z-index: 85; overflow-y: auto;
+    background: #53565a;
+    opacity: 0; visibility: hidden; transition: opacity .4s var(--ease), visibility 0s .4s; }
   .pm.open { opacity: 1; visibility: visible; transition: opacity .4s var(--ease); }
-  .pm-card { position: relative; width: min(100%, 880px); margin: 0 auto; min-height: 100%; background: var(--paper);
-    transform: translateY(24px); transition: transform .5s var(--glide); }
-  .pm.open .pm-card { transform: none; }
-  .pm-top { position: sticky; top: 0; z-index: 2; display: flex; justify-content: flex-end; gap: 8px; padding: 16px 16px 0; }
+  .pv-stage { position: relative; min-height: 100vh; min-height: 100svh; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 72px 16px 60px; }
+  .pv-caption { position: absolute; left: 20px; top: 20px; right: 70px; display: flex; flex-direction: column; gap: 2px; color: #fff; }
+  .pv-title { font-size: .98rem; font-weight: 500; letter-spacing: -.01em; }
+  .pv-format { font-size: .82rem; color: rgba(255,255,255,.65); }
+  .pv-close { position: absolute; top: 16px; right: 16px; z-index: 3;
+    width: 42px; height: 42px; border-radius: 50%; border: 0; cursor: pointer;
+    display: grid; place-items: center; background: rgba(255,255,255,.12); color: #fff; transition: background .25s; }
+  .pv-close:hover { background: rgba(255,255,255,.22); }
+  .pv-close svg { width: 17px; height: 17px; }
+  .pv-media { display: flex; align-items: center; justify-content: center; max-width: 100%; }
+  .pv-media video, .pv-media img { max-width: min(92vw, 1400px); max-height: calc(100svh - 150px); width: auto; height: auto; border-radius: 10px; background: #000; display: block; }
+  .pv-nav { display: flex; align-items: center; justify-content: center; gap: 18px; margin-top: 18px; }
+  .pv-nav[hidden] { display: none; }
+  .pv-arrow { width: 38px; height: 38px; border-radius: 50%; border: 0; cursor: pointer; display: grid; place-items: center;
+    background: rgba(255,255,255,.12); color: #fff; transition: background .25s; }
+  .pv-arrow:hover { background: rgba(255,255,255,.22); }
+  .pv-arrow svg { width: 15px; height: 15px; }
+  .pv-counter { font-size: .85rem; color: rgba(255,255,255,.75); min-width: 44px; text-align: center; }
+  @media (max-width: 640px) {
+    .pv-caption { top: auto; bottom: 20px; left: 16px; right: 16px; }
+    .pv-stage { padding-bottom: 96px; }
+    .pv-media video, .pv-media img { max-height: calc(100svh - 190px); }
+  }
+
+  .pv-info { background: #53565a; color: #fff; padding: 8px clamp(20px, 5vw, 56px) clamp(40px, 6vw, 72px); }
+  .pv-info-top { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+  .pv-info .case-type { color: #d9c3a3; }
+  .pv-info .case-title { color: #fff; margin-top: 10px; }
+  .pv-info .case-format { color: rgba(255,255,255,.65); }
+  .pv-info .case-desc { color: rgba(255,255,255,.78); }
+  .pv-info .tools-label { color: rgba(255,255,255,.55); }
+  .pv-info .tools li { background: rgba(255,255,255,.12); color: #fff; box-shadow: none; }
+  .pv-info .badge { background: rgba(0,0,0,.35); }
   .pm-icon { width: 40px; height: 40px; border-radius: 50%; border: 0; cursor: pointer; display: grid; place-items: center;
-    background: rgba(29,29,31,.06); color: var(--text); transition: background .25s; }
-  .pm-icon:hover { background: rgba(29,29,31,.12); }
+    background: rgba(255,255,255,.1); color: #fff; transition: background .25s; }
+  .pm-icon:hover { background: rgba(255,255,255,.18); }
   .pm-icon svg { width: 17px; height: 17px; }
-  .pm-body { padding: 8px clamp(20px, 5vw, 56px) clamp(40px, 6vw, 72px); }
-  .pm-media { margin-top: 8px; }
-  .pm-media .frame { margin-inline: 0; }
-  .pm-media .triptych .frame { aspect-ratio: 9 / 16; }
-  .pm-meta { margin-top: 22px; }
   .pm-more { position: relative; }
-  .pm-menu { position: absolute; right: 0; top: calc(100% + 8px); min-width: 170px; background: var(--paper); border-radius: 14px;
-    box-shadow: 0 16px 40px -18px rgba(0,0,0,.35), 0 0 0 1px rgba(0,0,0,.06); padding: 6px; opacity: 0; visibility: hidden; transform: translateY(-6px);
+  .pm-menu { position: absolute; right: 0; top: calc(100% + 8px); min-width: 170px; background: #3f4245; border-radius: 14px;
+    box-shadow: 0 16px 40px -18px rgba(0,0,0,.5); padding: 6px; opacity: 0; visibility: hidden; transform: translateY(-6px);
     transition: opacity .25s var(--ease), transform .25s var(--ease), visibility 0s .25s; }
   .pm-menu.open { opacity: 1; visibility: visible; transform: none; transition: opacity .25s var(--ease), transform .25s var(--ease); }
-  .pm-menu button { width: 100%; text-align: left; font: inherit; font-size: .9rem; padding: 10px 12px; border-radius: 9px; border: 0; background: none; cursor: pointer; color: var(--text); }
-  .pm-menu button:hover { background: rgba(0,0,0,.06); }
-  @media (max-width: 760px) { .pm-card { width: 100%; } }
+  .pm-menu button { width: 100%; text-align: left; font: inherit; font-size: .9rem; padding: 10px 12px; border-radius: 9px; border: 0; background: none; cursor: pointer; color: #fff; }
+  .pm-menu button:hover { background: rgba(255,255,255,.1); }
 
   .contact { text-align: center; }
   .contact .h2 { max-width: none; margin-inline: auto; text-wrap: balance;
@@ -368,43 +396,6 @@
   }
   @media (prefers-reduced-motion: reduce) { .sheet, .sheet-bg, .sheet-wrap { transition: none; } }
 
-  /* вертикальная работа: кадр слева, подпись справа */
-  .case.vertical { display: grid; grid-template-columns: minmax(0, 420px) minmax(0, 1fr); gap: 20px 56px; align-items: end; }
-  .case.vertical .case-meta { grid-template-columns: 1fr; margin-top: 0; }
-  .case.vertical.flip { grid-template-columns: minmax(0, 1fr) minmax(0, 420px); }
-  .case.vertical.flip > .frame { order: 2; }
-  @media (max-width: 760px) { .case.vertical { display: block; } .case.vertical .case-meta { margin-top: 18px; } .case.vertical .frame { aspect-ratio: 4 / 5 !important; } }
-
-  /* серия: три вертикальных видео */
-  .triptych-wrap { position: relative; }
-  .triptych { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; }
-  .case .triptych .frame { aspect-ratio: 9 / 16; }
-  @media (max-width: 760px) {
-    .triptych { display: flex; gap: 10px; overflow-x: auto; scroll-snap-type: x mandatory; margin-inline: -20px; padding-inline: 20px; scrollbar-width: none; }
-    .triptych::-webkit-scrollbar { display: none; }
-    .triptych .frame { flex: 0 0 56%; scroll-snap-align: start; }
-  }
-
-  /* стрелки прокрутки серии */
-  .tri-arrow {
-    position: absolute; top: 50%; z-index: 3; display: none;
-    width: 40px; height: 40px; border-radius: 50%; border: 0; cursor: pointer;
-    align-items: center; justify-content: center; color: #fff;
-    background: rgba(255,255,255,.14); backdrop-filter: blur(14px) saturate(160%); -webkit-backdrop-filter: blur(14px) saturate(160%);
-    box-shadow: inset 0 0 0 1px rgba(255,255,255,.22);
-    opacity: 0; pointer-events: none;
-    transition: opacity .4s var(--ease), background .3s var(--ease);
-  }
-  .tri-arrow svg { width: 16px; height: 16px; }
-  .tri-arrow.show { display: flex; opacity: .8; pointer-events: auto; }
-  .tri-arrow.show:hover { opacity: 1; background: rgba(255,255,255,.26); }
-  .tri-prev { left: 8px; transform: translateY(-50%); animation: triNudgeLeft 2.6s ease-in-out infinite; }
-  .tri-next { right: 8px; transform: translateY(-50%); animation: triNudgeRight 2.6s ease-in-out infinite; }
-  @keyframes triNudgeLeft { 0%, 100% { transform: translateY(-50%) translateX(0); } 50% { transform: translateY(-50%) translateX(-3px); } }
-  @keyframes triNudgeRight { 0%, 100% { transform: translateY(-50%) translateX(0); } 50% { transform: translateY(-50%) translateX(3px); } }
-  @media (min-width: 761px) { .triptych-wrap .tri-arrow { display: none !important; } }
-  @media (prefers-reduced-motion: reduce) { .tri-arrow { animation: none; } }
-
   /* фильтр категорий */
   .cat-filters { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 16px; }
   .cat-pill {
@@ -415,29 +406,6 @@
   }
   .cat-pill:hover { color: var(--text); border-color: rgba(0,0,0,.25); }
   .cat-pill[aria-pressed="true"] { background: var(--text); border-color: var(--text); color: #fff; }
-
-  /* фотогалерея: одно фото на экран, листание */
-  .photo-gallery { isolation: isolate; }
-  .pg-track { position: absolute; inset: 0; display: flex; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; }
-  .pg-track::-webkit-scrollbar { display: none; }
-  .pg-slide { flex: 0 0 100%; height: 100%; scroll-snap-align: start; }
-  .pg-counter {
-    position: absolute; left: 20px; bottom: 20px; z-index: 2;
-    padding: 8px 14px; border-radius: 999px;
-    font-size: .85rem; font-weight: 500; color: #fff;
-    background: rgba(255,255,255,.16); backdrop-filter: blur(16px) saturate(160%); -webkit-backdrop-filter: blur(16px) saturate(160%);
-    box-shadow: inset 0 0 0 1px rgba(255,255,255,.22);
-  }
-
-  /* просмотр со звуком */
-  .lb { position: fixed; inset: 0; z-index: 90; display: flex; align-items: center; justify-content: center; padding: 24px;
-    background: rgba(0,0,0,.94); opacity: 0; visibility: hidden; transition: opacity .4s var(--ease), visibility 0s .4s; }
-  .lb.open { opacity: 1; visibility: visible; transition: opacity .4s var(--ease); }
-  .lb video { width: auto; max-width: min(94vw, 1280px); max-height: 86vh; border-radius: 14px; background: #000; transform: scale(.96); transition: transform .5s var(--glide); }
-  .lb.open video { transform: none; }
-  .lb-close { position: absolute; top: calc(env(safe-area-inset-top, 0px) + 16px); right: 16px; width: 44px; height: 44px; border-radius: 50%; border: 0; cursor: pointer;
-    background: rgba(255,255,255,.14); color: #fff; font-size: 22px; line-height: 44px; }
-  .lb-close:hover { background: rgba(255,255,255,.24); }
 
   /* ===== АНИМАЦИИ ПРИ ПРОКРУТКЕ ===== */
   /* заголовки: слова поднимаются из-под маски */
@@ -506,7 +474,6 @@
       <a href="#top" data-sec="top" data-i18n="tab.home">Home</a>
       <a href="#about" data-sec="about" data-i18n="nav.about">About</a>
       <a href="#work" data-sec="work" data-i18n="nav.work">AI Projects</a>
-      <a href="#interiors" data-sec="interiors" data-i18n="nav.interiors">Interiors</a>
       <a href="#contact" data-sec="contact" data-i18n="nav.contact">Contact</a>
     </nav>
     <div class="lang" role="group" aria-label="Language">
@@ -569,6 +536,25 @@
     </div>
   </section>
 
+  <!-- ===== КАК Я РАБОТАЮ ===== -->
+  <section id="process">
+    <div class="wrap">
+      <h2 class="h2" data-split="rise" data-i18n="process.title">How I work</h2>
+      <p class="sub" data-reveal data-i18n="process.sub"></p>
+      <div class="steps" data-reveal style="--d:.1s">
+        <div class="step"><span class="step-num">01</span><h3 data-i18n="process.1t">Brief</h3><p data-i18n="process.1d"></p></div>
+        <div class="step-arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg></div>
+        <div class="step"><span class="step-num">02</span><h3 data-i18n="process.2t">Call</h3><p data-i18n="process.2d"></p></div>
+        <div class="step-arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg></div>
+        <div class="step"><span class="step-num">03</span><h3 data-i18n="process.3t">Concept</h3><p data-i18n="process.3d"></p></div>
+        <div class="step-arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg></div>
+        <div class="step"><span class="step-num">04</span><h3 data-i18n="process.4t">Generation</h3><p data-i18n="process.4d"></p></div>
+        <div class="step-arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg></div>
+        <div class="step"><span class="step-num">05</span><h3 data-i18n="process.5t">Product</h3><p data-i18n="process.5d"></p></div>
+      </div>
+    </div>
+  </section>
+
   <!-- ===== РАБОТЫ =====
        Кадр: замени внутренний div.ph на <img src="..." alt="..."> или
        <video src="..." autoplay muted loop playsinline></video>
@@ -579,22 +565,6 @@
       <div class="cat-filters" id="catFilters" data-reveal role="group" aria-label="Filter by category"></div>
 
       <div class="cases" id="cases"></div>
-    </div>
-  </section>
-
-  <!-- ===== ИНТЕРЬЕРЫ (скрыт до заполнения: SHOW_INTERIORS в скрипте) ===== -->
-  <section id="interiors">
-    <div class="wrap">
-      <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap">
-        <h2 class="h2" data-split="rise" data-i18n="int.title">Interiors</h2>
-        <span class="badge" data-i18n="int.soon">Soon</span>
-      </div>
-      <p class="sub" data-reveal data-i18n="int.sub"></p>
-      <div class="cases">
-        <article class="case">
-          <div class="frame iris"><div class="ph" style="position:absolute;inset:0;--tone:rgba(190,180,160,.3)"><strong data-i18n="case.ph">Project still</strong><small data-i18n="case.hint">16:9</small></div></div>
-        </article>
-      </div>
     </div>
   </section>
 
@@ -624,19 +594,19 @@
 
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
-<!-- Окно проекта -->
+<!-- Окно просмотра проекта -->
 <div class="pm" id="projectModal" role="dialog" aria-modal="true" aria-hidden="true">
-  <div class="pm-card">
-    <div class="pm-top">
-      <button class="pm-icon" type="button" id="pmShare" aria-label="Share"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M8 7h9v9"/></svg></button>
-      <div class="pm-more">
-        <button class="pm-icon" type="button" id="pmMore" aria-label="More"><svg viewBox="0 0 24 24" fill="currentColor"><circle cx="5" cy="12" r="1.8"/><circle cx="12" cy="12" r="1.8"/><circle cx="19" cy="12" r="1.8"/></svg></button>
-        <div class="pm-menu" id="pmMenu"><button type="button" id="pmCopyLink" data-i18n="share.copyLink">Copy link</button></div>
-      </div>
-      <button class="pm-icon" type="button" id="pmClose" aria-label="Close"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+  <button class="pv-close" type="button" id="pmClose" aria-label="Close"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+  <div class="pv-stage">
+    <div class="pv-caption" id="pmCaption"></div>
+    <div class="pv-media" id="pmMedia"></div>
+    <div class="pv-nav" id="pmNavWrap" hidden>
+      <button type="button" id="pmPrev" class="pv-arrow" aria-label="Previous"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg></button>
+      <span class="pv-counter" id="pmCounter"></span>
+      <button type="button" id="pmNext" class="pv-arrow" aria-label="Next"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg></button>
     </div>
-    <div class="pm-body" id="pmBody"></div>
   </div>
+  <div class="pv-info" id="pmInfo"></div>
 </div>
 
 <!-- Выбор почтового сервиса -->
@@ -730,13 +700,13 @@ const projects = [
   }
 ];
 const categories = {
-  brand:        { ru: "Бренд-фильм",      en: "Brand film" },
+  brand:        { ru: "Бренд-видео",      en: "Brand video" },
   fashion:      { ru: "Фешн-видео",       en: "Fashion" },
-  storytelling: { ru: "Короткометражка",  en: "Storytelling" },
+  storytelling: { ru: "Кино",             en: "Cinematic" },
   social:       { ru: "Reels и Shorts",   en: "Reels & Shorts" },
   homestaging:  { ru: "AI-визуализация интерьеров", en: "AI home staging" },
   mood:         { ru: "Фильм-настроение", en: "Mood film" },
-  photo:        { ru: "AI-фото",          en: "AI Photo" }
+  photo:        { ru: "AI-фотосессия",    en: "AI Photoshoot" }
 };
 const badges = {
   spec:     { ru: "Spec",      en: "Spec" },
@@ -789,39 +759,86 @@ function renderCases() {
   armReveal(casesEl.querySelectorAll("[data-reveal]"));
 }
 
-function buildMediaMarkup(p, t) {
-  if (p.series) {
-    return `<div class="triptych-wrap"><div class="triptych">${p.series.map((x, i) => `<div class="frame"><video data-vid="${x.id}" controls playsinline preload="metadata"${i === 0 ? " autoplay" : ""}></video></div>`).join("")}</div><button class="tri-arrow tri-prev" type="button" aria-label="Previous">${arrowIcon("prev")}</button><button class="tri-arrow tri-next" type="button" aria-label="Next">${arrowIcon("next")}</button></div>`;
-  }
-  if (p.photos) {
-    return `<div class="frame photo-gallery"${p.ratio ? ` style="aspect-ratio:${p.ratio}"` : ""}><div class="pg-track">${p.photos.map((f, i) => `<div class="pg-slide"><img src="media/work/${f}" alt="${t.title} ${i + 1}" loading="${i === 0 ? "eager" : "lazy"}"></div>`).join("")}</div><button class="tri-arrow tri-prev" type="button" aria-label="Previous">${arrowIcon("prev")}</button><button class="tri-arrow tri-next" type="button" aria-label="Next">${arrowIcon("next")}</button><span class="pg-counter">1 / ${p.photos.length}</span></div>`;
-  }
-  return `<div class="frame"${p.ratio ? ` style="aspect-ratio:${p.ratio}"` : ""}><video data-vid="${p.video}" controls playsinline autoplay></video></div>`;
-}
-
-/* ===== Окно проекта ===== */
+/* ===== Окно просмотра проекта ===== */
 const pm = document.getElementById("projectModal");
-const pmBody = document.getElementById("pmBody");
-const pmMenu = document.getElementById("pmMenu");
-let pmLastFocus = null, currentProjectId = null;
-function closeMenu() { pmMenu.classList.remove("open"); }
+const pmCaption = document.getElementById("pmCaption");
+const pmMedia = document.getElementById("pmMedia");
+const pmInfo = document.getElementById("pmInfo");
+const pmNavWrap = document.getElementById("pmNavWrap");
+const pmCounter = document.getElementById("pmCounter");
+let pmLastFocus = null, currentProjectId = null, pvProject = null, pvIndex = 0, pmMenuEl = null;
+
+function pvCount(p) { return p.series ? p.series.length : p.photos ? p.photos.length : 1; }
+function pvPauseMedia() {
+  const v = pmMedia.querySelector("video");
+  if (v) v.pause();
+}
+function pvRenderMedia() {
+  const p = pvProject;
+  pvPauseMedia();
+  if (p.series) {
+    const item = p.series[pvIndex];
+    pmMedia.innerHTML = `<video data-vid="${item.id}" controls playsinline autoplay></video>`;
+    setVideo(pmMedia.querySelector("video"), item.id, true);
+  } else if (p.photos) {
+    const t = p[lang] || p.en;
+    pmMedia.innerHTML = `<img src="media/work/${p.photos[pvIndex]}" alt="${t.title} ${pvIndex + 1}">`;
+  } else {
+    pmMedia.innerHTML = `<video data-vid="${p.video}" controls playsinline autoplay></video>`;
+    setVideo(pmMedia.querySelector("video"), p.video, true);
+  }
+  const total = pvCount(p);
+  pmNavWrap.hidden = total <= 1;
+  if (total > 1) pmCounter.textContent = (pvIndex + 1) + " / " + total;
+}
+function pvGo(delta) {
+  const total = pvCount(pvProject);
+  if (total <= 1) return;
+  pvIndex = (pvIndex + delta + total) % total;
+  pvRenderMedia();
+}
+document.getElementById("pmPrev").addEventListener("click", () => pvGo(-1));
+document.getElementById("pmNext").addEventListener("click", () => pvGo(1));
+
+function closeMenu() { if (pmMenuEl) pmMenuEl.classList.remove("open"); }
+function shareLink() {
+  const url = location.origin + location.pathname + "#project=" + currentProjectId;
+  if (navigator.share) { navigator.share({ title: "InMorpho Studio", url }).catch(() => {}); }
+  else { navigator.clipboard?.writeText(url).then(() => showToast(dict[lang]["share.copied"])).catch(() => showToast(url)); }
+}
 function renderModalContent(p) {
   const t = p[lang] || p.en;
   const cat = (categories[p.category] || {})[lang] || "";
   const badge = p.badge && badges[p.badge] ? `<span class="badge">${badges[p.badge][lang]}</span>` : "";
   const tools = p.tools.length
     ? `<p class="tools-label">${dict[lang]["case.tools"]}</p><ul class="tools">${p.tools.map(x => `<li>${x}</li>`).join("")}</ul>` : "";
-  pmBody.innerHTML = `
-    <div class="pm-media">${buildMediaMarkup(p, t)}</div>
-    <div class="pm-meta">
+  pmCaption.innerHTML = `<span class="pv-title">${t.title}</span><span class="pv-format">${t.format}</span>`;
+  pmInfo.innerHTML = `
+    <div class="pv-info-top">
       <p class="case-type">${cat}${badge}</p>
-      <h3 class="case-title">${t.title}</h3>
-      <p class="case-format">${t.format}</p>
-      <p class="case-desc" style="margin-top:14px">${t.desc}</p>
-      ${tools}
-    </div>`;
-  pmBody.querySelectorAll("video[data-vid]").forEach(v => { setVideo(v, v.dataset.vid, v.hasAttribute("autoplay")); });
-  wireTriptychArrows(pmBody);
+      <div style="display:flex;gap:8px">
+        <button class="pm-icon" type="button" id="pmShare" aria-label="Share"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M8 7h9v9"/></svg></button>
+        <div class="pm-more">
+          <button class="pm-icon" type="button" id="pmMore" aria-label="More"><svg viewBox="0 0 24 24" fill="currentColor"><circle cx="5" cy="12" r="1.8"/><circle cx="12" cy="12" r="1.8"/><circle cx="19" cy="12" r="1.8"/></svg></button>
+          <div class="pm-menu" id="pmMenu"><button type="button" id="pmCopyLink">${dict[lang]["share.copyLink"]}</button></div>
+        </div>
+      </div>
+    </div>
+    <h3 class="case-title">${t.title}</h3>
+    <p class="case-format">${t.format}</p>
+    <p class="case-desc" style="margin-top:14px">${t.desc}</p>
+    ${tools}`;
+  pmMenuEl = document.getElementById("pmMenu");
+  document.getElementById("pmShare").addEventListener("click", shareLink);
+  document.getElementById("pmMore").addEventListener("click", () => pmMenuEl.classList.toggle("open"));
+  document.getElementById("pmCopyLink").addEventListener("click", () => {
+    const url = location.origin + location.pathname + "#project=" + currentProjectId;
+    navigator.clipboard?.writeText(url).then(() => showToast(dict[lang]["share.copied"])).catch(() => showToast(url));
+    closeMenu();
+  });
+  pvProject = p;
+  pvIndex = 0;
+  pvRenderMedia();
 }
 function openProjectModal(id, skipHash) {
   const p = projects.find(x => x.id === id);
@@ -836,6 +853,7 @@ function openProjectModal(id, skipHash) {
   document.getElementById("pmClose").focus({ preventScroll: true });
 }
 function closeProjectModal() {
+  pvPauseMedia();
   pm.classList.remove("open"); pm.setAttribute("aria-hidden", "true");
   document.body.style.overflow = "";
   closeMenu();
@@ -844,44 +862,8 @@ function closeProjectModal() {
   currentProjectId = null;
 }
 document.getElementById("pmClose").addEventListener("click", closeProjectModal);
-pm.addEventListener("click", e => { if (e.target === pm) closeProjectModal(); });
 document.addEventListener("keydown", e => { if (e.key === "Escape" && pm.classList.contains("open")) closeProjectModal(); });
-function shareLink() {
-  const url = location.origin + location.pathname + "#project=" + currentProjectId;
-  if (navigator.share) { navigator.share({ title: "InMorpho Studio", url }).catch(() => {}); }
-  else { navigator.clipboard?.writeText(url).then(() => showToast(dict[lang]["share.copied"])).catch(() => showToast(url)); }
-}
-document.getElementById("pmShare").addEventListener("click", shareLink);
-document.getElementById("pmMore").addEventListener("click", () => pmMenu.classList.toggle("open"));
-document.getElementById("pmCopyLink").addEventListener("click", () => {
-  const url = location.origin + location.pathname + "#project=" + currentProjectId;
-  navigator.clipboard?.writeText(url).then(() => showToast(dict[lang]["share.copied"])).catch(() => showToast(url));
-  closeMenu();
-});
-document.addEventListener("click", e => { if (pmMenu.classList.contains("open") && !e.target.closest(".pm-more")) closeMenu(); });
-
-function wireTriptychArrows(root) {
-  (root || document).querySelectorAll(".triptych-wrap, .photo-gallery").forEach(wrap => {
-    const track = wrap.querySelector(".triptych, .pg-track");
-    const prev = wrap.querySelector(".tri-prev");
-    const next = wrap.querySelector(".tri-next");
-    const counter = wrap.querySelector(".pg-counter");
-    if (!track || !prev || !next) return;
-    const paged = track.classList.contains("pg-track");
-    const step = paged ? track.clientWidth : track.clientWidth * 0.8;
-    const update = () => {
-      const max = track.scrollWidth - track.clientWidth;
-      prev.classList.toggle("show", track.scrollLeft > 28);
-      next.classList.toggle("show", track.scrollLeft < max - 28);
-      if (counter) counter.textContent = (Math.round(track.scrollLeft / track.clientWidth) + 1) + " / " + track.children.length;
-    };
-    track.addEventListener("scroll", update, { passive: true });
-    window.addEventListener("resize", update);
-    prev.addEventListener("click", () => track.scrollBy({ left: -step, behavior: "smooth" }));
-    next.addEventListener("click", () => track.scrollBy({ left: step, behavior: "smooth" }));
-    update();
-  });
-}
+document.addEventListener("click", e => { if (pmMenuEl && pmMenuEl.classList.contains("open") && !e.target.closest(".pm-more")) closeMenu(); });
 /* ===== Фильтр категорий над "Историями" ===== */
 let activeCategory = "all";
 const catFiltersEl = document.getElementById("catFilters");
@@ -913,8 +895,15 @@ function renderToolkit() {
 /* ===== ТЕКСТЫ RU / EN — правь здесь ===== */
 const dict = {
   ru: {
-    "tab.home": "Главная", "nav.about": "Обо мне", "nav.work": "AI-проекты", "nav.contact": "Контакты", "name.first": "Надина", "name.last": "Ширина", "name.full": "Надина Ширина", "nav.interiors": "Интерьеры", "int.title": "Интерьеры", "int.soon": "Скоро", "int.sub": "AI-визуализация и хоумстейджинг для интерьеров, в которых хочется жить.",
+    "tab.home": "Главная", "nav.about": "Обо мне", "nav.work": "AI-проекты", "nav.contact": "Контакты", "name.first": "Надина", "name.last": "Ширина", "name.full": "Надина Ширина",
     "share.copied": "Ссылка скопирована", "share.copyLink": "Скопировать ссылку",
+    "process.title": "Как я работаю",
+    "process.sub": "Пять шагов от идеи до готового видео.",
+    "process.1t": "Бриф", "process.1d": "Присылаете бриф: задача, бренд, срок.",
+    "process.2t": "Созвон", "process.2d": "Созваниваемся, если нужно уточнить детали.",
+    "process.3t": "Концепция", "process.3d": "Показываю идею: сценарий, раскадровка, референсы.",
+    "process.4t": "Генерация", "process.4d": "Создаю видео в нейросетях, присылаю черновые кадры.",
+    "process.5t": "Продукт", "process.5d": "Финальный монтаж с учётом правок, в нужных форматах.",
     "hero.kicker": "InMorpho Studio",
     "hero.tagline": "Снимаю без камеры и людей так, что невозможно не почувствовать.",
     "hero.cta1": "Смотреть работы", "hero.cta2": "Обсудить проект",
@@ -947,8 +936,15 @@ const dict = {
     "contact.upworkVal": "Nadina S."
   },
   en: {
-    "tab.home": "Home", "nav.about": "About", "nav.work": "AI Projects", "nav.contact": "Contact", "name.first": "Nadina", "name.last": "Shirina", "name.full": "Nadina Shirina", "nav.interiors": "Interiors", "int.title": "Interiors", "int.soon": "Coming soon", "int.sub": "AI visualisation and home staging for interiors you want to live in.",
+    "tab.home": "Home", "nav.about": "About", "nav.work": "AI Projects", "nav.contact": "Contact", "name.first": "Nadina", "name.last": "Shirina", "name.full": "Nadina Shirina",
     "share.copied": "Link copied", "share.copyLink": "Copy link",
+    "process.title": "How I work",
+    "process.sub": "Five steps from idea to finished video.",
+    "process.1t": "Brief", "process.1d": "Send a brief: the task, the brand, the deadline.",
+    "process.2t": "Call", "process.2d": "We get on a call if anything needs clarifying.",
+    "process.3t": "Concept", "process.3d": "I show the idea: script, storyboard, references.",
+    "process.4t": "Generation", "process.4d": "I generate the video with AI and send draft frames.",
+    "process.5t": "Product", "process.5d": "Final edit with your notes, delivered in the formats you need.",
     "hero.kicker": "InMorpho Studio",
     "hero.tagline": "No camera. No cast. Videos you can't help but feel.",
     "hero.cta1": "View work", "hero.cta2": "Discuss a project",
@@ -1057,7 +1053,7 @@ brandEl.addEventListener("click", () => {
 brandEl.addEventListener("animationend", e => { if (e.target === brandEl) brandEl.classList.remove("pulse"); });
 window.addEventListener("scroll", () => { if (spyLock) releaseLock(160); }, { passive: true });
 
-const sections = ["top", "about", "work", "interiors", "contact"].map(id => document.getElementById(id)).filter(el => el && !el.hidden);
+const sections = ["top", "about", "process", "work", "contact"].map(id => document.getElementById(id)).filter(el => el && !el.hidden);
 function spy() {
   if (spyLock) return;
   const probe = nav.offsetHeight + window.innerHeight * 0.3;
