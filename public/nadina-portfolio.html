@@ -664,7 +664,7 @@ const projects = [
   {
     id: "le-smoking",
     category: "storytelling", badge: "personal", media: "", video: "le-smoking", cover: "le-smoking-cover", ratio: "4 / 3", tone: "rgba(200,200,200,.22)",
-    tools: ["Midjourney", "Seedance 2.5", "Kling", "Nano Banana", "GPT Image"],
+    tools: ["Midjourney", "Nano Banana", "GPT Image", "Seedance 2.5", "Kling"],
     ru: { title: "Le Smoking", format: "Историческая короткометражка, 1 минута",
           desc: "Нью-Йорк, конец шестидесятых. Нэн Кемпнер не пускают в ресторан La Côte Basque в брючном смокинге Yves Saint Laurent, и она возвращается в одном жакете, надетом как мини-платье. Кинематографичная история бренда, где характер Le Smoking виден за одну минуту." },
     en: { title: "Le Smoking", format: "Fashion history short, 1 minute",
@@ -674,7 +674,7 @@ const projects = [
     id: "agmes",
     category: "brand", badge: "spec", media: "",
     series: [{ id: "agmes-bracelets", name: "Bracelets" }, { id: "agmes-heart", name: "Heart" }, { id: "agmes-earrings", name: "Earrings" }], tone: "rgba(217,196,163,.32)",
-    tools: ["Midjourney", "Seedance 2.0", "Kling", "Nano Banana", "GPT Image"],
+    tools: ["Midjourney", "Nano Banana", "GPT Image", "Seedance 2.0", "Kling"],
     ru: { title: "AGMES", format: "Серия видео для бренда",
           desc: "У AGMES лаконичные скульптурные формы, будто обточенные природой. Я перенесла их в пустыню, где песок, вода и свет повторяют линии украшений, а тишина оставляет взгляд наедине с деталью. Три части показывают браслеты, подвеску-сердце и серьги. Серия сделана по собственной инициативе как питч бренду." },
     en: { title: "AGMES", format: "Brand video series",
@@ -683,7 +683,7 @@ const projects = [
   {
     id: "splendid",
     category: "brand", badge: "spec", media: "", video: "hotel-splendid", ratio: "3 / 2", tone: "rgba(120,150,160,.28)",
-    tools: ["Kling", "Nano Banana", "GPT Image"],
+    tools: ["Nano Banana", "GPT Image", "Kling"],
     ru: { title: "Splendid Conference & SPA Resort", format: "Атмосферный бренд-фильм, 14 секунд",
           desc: "Спек-проект к 20-летию Splendid Conference & SPA Resort. Атмосферная история в реальном лобби ресторана отеля с сгенерированными персонажами в кадре. Каждый год здесь рождается множество историй. Это одна из них." },
     en: { title: "Splendid Conference & SPA Resort", format: "Atmospheric brand film, 14 seconds",
@@ -692,7 +692,7 @@ const projects = [
   {
     id: "pomegranate",
     category: "mood", badge: "personal", media: "", video: "pomegranate", cover: "pomegranate-cover", ratio: "9 / 16", vertical: true, tone: "rgba(160,40,50,.3)",
-    tools: ["Midjourney", "Kling", "Nano Banana"],
+    tools: ["Midjourney", "Nano Banana", "Kling"],
     ru: { title: "Pomegranate", format: "Визуальный этюд, 36 секунд",
           desc: "Бархат, гранат и красное вино. Этюд о чувственности, рассказанный через фактуры и крупные детали. Настроение здесь важнее сюжета." },
     en: { title: "Pomegranate", format: "Visual study, 36 seconds",
@@ -701,7 +701,7 @@ const projects = [
   {
     id: "miumiu",
     category: "brand", badge: "spec", media: "", video: "miumiu", coverImg: "miumiu-cover", ratio: "9 / 16", vertical: true, flip: true, tone: "rgba(190,40,40,.3)",
-    tools: ["Midjourney", "Kling", "Nano Banana"],
+    tools: ["Midjourney", "Nano Banana", "Kling"],
     ru: { title: "Miu Miu", format: "Бэкстейдж, 26 секунд",
           desc: "Мой эксперимент с форматом. Закулисье съёмки, которой не было. Эскалаторы метро, свет, камера и финальный образ в красном кружеве и очках Miu Miu. Съёмочную группу я тоже создала в нейросетях." },
     en: { title: "Miu Miu", format: "AI backstage, 26 seconds",
@@ -733,7 +733,7 @@ const badges = {
 };
 
 /* ===== ИНСТРУМЕНТЫ — правь здесь ===== */
-const toolkit = ["Midjourney", "Seedance 2.5", "Kling", "Nano Banana", "GPT Image"];
+const toolkit = ["Midjourney", "Nano Banana", "GPT Image", "Seedance 2.5", "Kling"];
 
 var io = null, revealReady = false, renderedLang = null;
 function armReveal(els) {
