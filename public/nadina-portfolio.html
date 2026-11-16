@@ -324,10 +324,8 @@
     font-weight: 400; font-size: clamp(2.3rem, 5vw, 4.4rem); line-height: 1.15; letter-spacing: 0; }
   .contact .h2 .w { padding: .12em .12em .28em; margin: -.12em -.12em -.28em; }
   .cline { display: flex; flex-direction: column; align-items: center; gap: 10px; margin-top: clamp(20px, 3vw, 32px); }
-  .brief-link { display: inline-flex; align-items: center; gap: 8px; margin-top: 14px; color: var(--accent); font-size: clamp(1rem, 1.3vw, 1.12rem); font-weight: 500; }
-  .brief-link span { background: linear-gradient(currentColor, currentColor) 0 100% / 100% 1px no-repeat; padding-bottom: 2px; text-underline-offset: 3px; }
-  .brief-link .arr { width: 13px; height: 13px; opacity: .7; transition: transform .45s var(--glide), opacity .3s; }
-  .brief-link:hover .arr { transform: translate(2px, -2px); opacity: 1; }
+  .sub-arrow { display: inline-block; color: var(--accent); font-weight: 600; transition: transform .35s var(--glide), color .25s; }
+  .sub-arrow:hover { transform: translateY(3px); color: var(--text); }
   .citem { display: inline-flex; align-items: center; gap: 9px; padding: 6px 2px; font-size: clamp(1rem, 1.3vw, 1.12rem); color: var(--text); }
   
   .citem span { background: linear-gradient(currentColor, currentColor) 0 100% / 0 1px no-repeat; transition: background-size .45s var(--ease); padding-bottom: 2px; }
@@ -621,11 +619,7 @@
   <section id="contact" class="contact">
     <div class="wrap">
       <h2 class="h2" data-split="rise" data-i18n="contact.title">Every brand has its own story. Let's create yours.</h2>
-      <p class="sub" data-reveal data-i18n="contact.sub"></p>
-      <a class="brief-link" href="#" id="briefLink" target="_blank" rel="noopener" data-reveal style="--d:.06s">
-        <span data-i18n="contact.briefCta"></span>
-        <svg class="arr" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M8 7h9v9"/></svg>
-      </a>
+      <p class="sub" data-reveal><span data-i18n="contact.sub"></span> <a class="sub-arrow" href="#" id="briefLink" target="_blank" rel="noopener" aria-label="Send the brief">↓</a></p>
 
       <div class="cline" data-reveal style="--d:.1s">
         <!-- ПРАЙС: ссылка задаётся в PRICE_URL в скрипте -->
@@ -997,8 +991,7 @@ const dict = {
     "case4.type": "Бренд-фильм", "case4.title": "Название проекта",
     "case5.type": "AI-хоумстейджинг", "case5.title": "Название проекта",
     "contact.title": "У каждого бренда своя история. Создадим вашу.",
-    "contact.sub": "Расскажите о бренде и задаче, а я предложу идею и формат. ↓",
-    "contact.briefCta": "Отправить бриф",
+    "contact.sub": "Расскажите о бренде и задаче, а я предложу идею и формат.",
     "contact.write": "Написать мне", "contact.copy": "Копировать", "contact.copied": "Адрес скопирован", "contact.price": "Прайс по запросу", "contact.priceReady": "Прайс", "sheet.title": "Написать на почту", "sheet.app": "Почтовое приложение", "sheet.copy": "Скопировать адрес", "sheet.cancel": "Отмена", "contact.mailHint": "Адрес скопирован. Если почта не открылась, вставьте его в новое письмо.",
     "contact.upworkVal": "Nadina S."
   },
@@ -1041,8 +1034,7 @@ const dict = {
     "case4.type": "Brand film", "case4.title": "Project title",
     "case5.type": "AI home staging", "case5.title": "Project title",
     "contact.title": "Every brand has its own story. Let's create yours.",
-    "contact.sub": "Tell me about your brand and the task. I'll come back with an idea and a format. ↓",
-    "contact.briefCta": "Send the brief",
+    "contact.sub": "Tell me about your brand and the task. I'll come back with an idea and a format.",
     "contact.write": "Write to me", "contact.copy": "Copy", "contact.copied": "Address copied", "contact.price": "Pricing on request", "contact.priceReady": "Pricing", "sheet.title": "Write an email", "sheet.app": "Mail app", "sheet.copy": "Copy address", "sheet.cancel": "Cancel", "contact.mailHint": "Address copied. If your mail app didn't open, paste it into a new email.",
     "contact.upworkVal": "Nadina S."
   }
