@@ -120,7 +120,10 @@
   /* ===== HERO ===== */
   .hero { position: relative; display: flex; flex-direction: column; padding: 110px 0 clamp(28px, 4vw, 48px); isolation: isolate; }
   .hero-rule { height: 1px; background: var(--line); }
-  #about { padding-top: clamp(32px, 4.5vw, 56px); }
+  #about {
+    min-height: 100svh; display: flex; flex-direction: column; justify-content: center;
+    padding-top: clamp(24px, 4vh, 56px); padding-bottom: clamp(24px, 4vh, 56px);
+  }
   .spot {
     position: absolute; inset: 0; z-index: -1; pointer-events: none; opacity: 0; transition: opacity .8s var(--ease);
     -webkit-mask-image: radial-gradient(closest-side, #000 60%, transparent); mask-image: radial-gradient(closest-side, #000 60%, transparent);
@@ -165,15 +168,19 @@
   .h2 { font-size: clamp(2rem, 4vw, 3.25rem); font-weight: 500; line-height: 1.08; letter-spacing: -.035em; }
   .sub { color: var(--muted); font-size: clamp(.95rem, 1.2vw, 1.12rem); max-width: none; margin-top: 10px; text-wrap: pretty; }
 
-  .lead { font-size: clamp(1.1rem, 2vw, 1.6rem); line-height: 1.4; letter-spacing: -.02em; font-weight: 400; max-width: none; margin-top: 18px; text-wrap: pretty; }
-  .about-grid { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: clamp(20px, 4vw, 56px); margin-top: clamp(28px, 4vw, 48px); align-items: end; }
-  .portrait { aspect-ratio: 5 / 7; }
+  .lead { font-size: clamp(1rem, 1.6vh, 1.6rem); line-height: 1.35; letter-spacing: -.02em; font-weight: 400; max-width: none; margin-top: clamp(10px, 2vh, 18px); text-wrap: pretty; }
+  .about-grid { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: clamp(16px, 3vw, 40px); margin-top: clamp(14px, 3vh, 36px); align-items: center; }
+  .portrait { height: clamp(180px, 38vh, 440px); width: auto; aspect-ratio: 5 / 7; }
   .portrait img { object-position: 50% 30%; }
-  .facts { display: grid; gap: clamp(14px, 2vw, 28px); }
-  .fact { padding-top: 14px; border-top: 1px solid var(--line); }
-  .fact h3 { font-size: 1.02rem; font-weight: 600; letter-spacing: -.01em; margin-bottom: 8px; }
-  .fact p { color: var(--muted); text-wrap: pretty; }
-  @media (max-width: 820px) { .about-grid { grid-template-columns: 1fr; } .portrait { aspect-ratio: 4 / 3; } .fact h3 { margin-bottom: 4px; } }
+  .facts { display: grid; gap: clamp(8px, 1.6vh, 22px); }
+  .fact { padding-top: 10px; border-top: 1px solid var(--line); }
+  .fact h3 { font-size: 1.02rem; font-weight: 600; letter-spacing: -.01em; margin-bottom: 4px; }
+  .fact p { color: var(--muted); text-wrap: pretty; font-size: clamp(.9rem, 1.5vh, 1rem); line-height: 1.4; }
+  @media (max-width: 820px) {
+    .about-grid { grid-template-columns: 1fr; }
+    .portrait { width: 100%; height: auto; aspect-ratio: 16 / 9; max-height: 32vh; }
+    .fact h3 { margin-bottom: 4px; }
+  }
 
   /* ===== КАК Я РАБОТАЮ ===== */
   .steps { display: flex; align-items: stretch; gap: 0; margin-top: clamp(24px, 3.5vw, 44px); flex-wrap: wrap; }
@@ -195,6 +202,7 @@
   .case-type { color: var(--accent); font-size: .95rem; font-weight: 500; margin-bottom: 6px; }
   .case-title { font-size: clamp(1.45rem, 2.2vw, 1.9rem); font-weight: 500; line-height: 1.12; letter-spacing: -.025em; }
   .case-desc { color: var(--muted); font-size: 1rem; }
+  .case-disclaimer { margin-top: 16px; font-size: .78rem; color: var(--muted); font-style: italic; }
 
   /* ===== РАБОТЫ: плитки матрицы ===== */
   .tile {
@@ -252,6 +260,7 @@
   .pv-info .case-title { color: #fff; margin-top: 10px; }
   .pv-info .case-format { color: rgba(255,255,255,.65); }
   .pv-info .case-desc { color: rgba(255,255,255,.78); }
+  .pv-info .case-disclaimer { color: rgba(255,255,255,.45); }
   .pv-info .tools-label { color: rgba(255,255,255,.55); }
   .pv-info .tools li { background: rgba(255,255,255,.12); color: #fff; box-shadow: none; }
   .pv-info .badge { background: rgba(0,0,0,.35); }
@@ -363,7 +372,7 @@
   .tools li { padding: 6px 13px; border-radius: 999px; background: var(--paper); box-shadow: 0 0 0 1px rgba(0,0,0,.07); font-size: .82rem; font-weight: 500; }
 
   /* инструменты */
-  .toolkit { margin-top: clamp(36px, 5vw, 64px); }
+  .toolkit { margin-top: clamp(16px, 3vh, 40px); }
   .tk-title { font-size: clamp(1.3rem, 1.8vw, 1.55rem); font-weight: 500; letter-spacing: -.02em; }
   .tk-sub { color: var(--muted); margin-top: 10px; max-width: none; font-size: 1.05rem; }
   .tk-grid { display: flex; flex-wrap: wrap; align-items: center; row-gap: 10px; margin-top: 14px; }
@@ -827,7 +836,8 @@ function renderModalContent(p) {
     <h3 class="case-title">${t.title}</h3>
     <p class="case-format">${t.format}</p>
     <p class="case-desc" style="margin-top:14px">${t.desc}</p>
-    ${tools}`;
+    ${tools}
+    <p class="case-disclaimer">${dict[lang]["case.disclaimer"]}</p>`;
   pmMenuEl = document.getElementById("pmMenu");
   document.getElementById("pmShare").addEventListener("click", shareLink);
   document.getElementById("pmMore").addEventListener("click", () => pmMenuEl.classList.toggle("open"));
@@ -897,6 +907,7 @@ const dict = {
   ru: {
     "tab.home": "Главная", "nav.about": "Обо мне", "nav.work": "AI-проекты", "nav.contact": "Контакты", "name.first": "Надина", "name.last": "Ширина", "name.full": "Надина Ширина",
     "share.copied": "Ссылка скопирована", "share.copyLink": "Скопировать ссылку",
+    "case.disclaimer": "Некоммерческий проект. Выполнен в учебных целях, без заказа бренда.",
     "process.title": "Как я работаю",
     "process.sub": "Пять шагов от идеи до готового видео.",
     "process.1t": "Бриф", "process.1d": "Присылаете бриф: задача, бренд, срок.",
@@ -919,7 +930,7 @@ const dict = {
     "about.f3": "Изучение ДНК бренда, концепция, сценарий, раскадровка, генерация и монтаж в одних руках. Генеративное видео снимает ограничения классической съёмки. Любую эпоху и любое пространство можно построить без площадки, логистики и актёров, а идею клиент видит и правит задолго до финальной версии.",
     "tk.title": "Инструменты",
     "tk.sub": "Под каждую задачу подбираю свою модель и связку инструментов.",
-    "work.title": "Истории",
+    "work.title": "Проекты",
     "work.sub": "Бренд-фильмы, короткометражки и фильмы-настроения, созданные в нейросетях.",
     "work.all": "Все",
     "case.ph": "Кадр проекта", "case.hint": "16:9, JPG, PNG или MP4",
@@ -938,6 +949,7 @@ const dict = {
   en: {
     "tab.home": "Home", "nav.about": "About", "nav.work": "AI Projects", "nav.contact": "Contact", "name.first": "Nadina", "name.last": "Shirina", "name.full": "Nadina Shirina",
     "share.copied": "Link copied", "share.copyLink": "Copy link",
+    "case.disclaimer": "Non-commercial project. Made for educational purposes, not commissioned by the brand.",
     "process.title": "How I work",
     "process.sub": "Five steps from idea to finished video.",
     "process.1t": "Brief", "process.1d": "Send a brief: the task, the brand, the deadline.",
@@ -949,7 +961,7 @@ const dict = {
     "hero.tagline": "No camera. No cast. Videos you can't help but feel.",
     "hero.cta1": "View work", "hero.cta2": "Discuss a project",
     "reel.label": "Showreel", "reel.hint": "Video slot 16:9. Drop in an MP4 or a still.",
-    "about.title": "About",
+    "about.title": "About me",
     "about.lead": "Brands need video that hooks the viewer. A conventional shoot takes weeks of preparation and a serious budget. I create these films entirely with AI, keeping the style and the emotion of the brand.",
     "about.photo": "Your portrait",
     "about.f1t": "My path",
@@ -960,7 +972,7 @@ const dict = {
     "about.f3": "Brand DNA research, concept, script, storyboard, generation and edit in one pair of hands. Generative video removes the limits of a conventional shoot. Any era or space can be built without a set, logistics or a cast, and the client sees and adjusts the idea long before the final cut.",
     "tk.title": "Tools",
     "tk.sub": "I match the model and the toolchain to each brief.",
-    "work.title": "Stories",
+    "work.title": "Projects",
     "work.sub": "Brand films, storytelling and mood films, created with AI.",
     "work.all": "All",
     "case.ph": "Project still", "case.hint": "16:9, JPG, PNG or MP4",
