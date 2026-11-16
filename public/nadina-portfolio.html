@@ -689,17 +689,6 @@ function setVideo(el, id, autoplay) {
    tools:    инструменты именно этого проекта — оставь только те, что использовала */
 const projects = [
   {
-    id: "rosalia",
-    category: "photo", badge: "spec", media: "",
-    photos: ["rosalia-1-ballerina.webp", "rosalia-2-mic-portrait.webp", "rosalia-3-black-dress-arms.jpg", "rosalia-4-floor.webp", "rosalia-5-feather-headpiece.webp", "rosalia-6-flying-feathers-portrait.jpg", "rosalia-7-flying-feathers-full.webp"],
-    ratio: "4 / 5", tone: "rgba(120,120,130,.28)",
-    tools: ["Midjourney"],
-    ru: { title: "Rosalía", format: "AI-фотосессия по мотивам тура LUX, 7 кадров",
-          desc: "Альбом LUX Росалии — путь от земного к небесному через веру и трансформацию. Я взяла свет как главный инструмент серии.<br><br>Все кадры полностью созданы в нейросетях. Это моя авторская интерпретация и благодарность за музыку, которую хочется видеть." },
-    en: { title: "Rosalía", format: "AI photoshoot inspired by the LUX tour, 7 frames",
-          desc: "Rosalía's LUX album traces a journey from the earthly to the celestial, through faith and transformation. I used light as the series' core tool.<br><br>Every frame is fully AI-generated. This is my own interpretation, a thank-you for music that asks to be seen." }
-  },
-  {
     id: "le-smoking",
     category: "storytelling", badge: "personal", media: "", video: "le-smoking", cover: "le-smoking-cover", ratio: "4 / 3", tone: "rgba(200,200,200,.22)",
     tools: ["Midjourney", "Nano Banana", "GPT Image", "Seedance 2.5", "Kling"],
@@ -753,6 +742,17 @@ const projects = [
           desc: "Мой эксперимент с форматом. Закулисье съёмки, которой не было. Эскалаторы метро, свет, камера и финальный образ в красном кружеве и очках Miu Miu. Съёмочную группу я тоже создала в нейросетях." },
     en: { title: "Miu Miu", format: "AI backstage, 26 seconds",
           desc: "My experiment with the format. Behind the scenes of a shoot that never happened, with subway escalators, lighting, camera and the final look in red lace and Miu Miu glasses. The film crew was generated too." }
+  },
+  {
+    id: "rosalia",
+    category: "photo", badge: "spec", media: "",
+    photos: ["rosalia-1-ballerina.webp", "rosalia-2-mic-portrait.webp", "rosalia-3-black-dress-arms.jpg", "rosalia-4-floor.webp", "rosalia-5-feather-headpiece.webp", "rosalia-6-flying-feathers-portrait.jpg", "rosalia-7-flying-feathers-full.webp"],
+    ratio: "4 / 5", tone: "rgba(120,120,130,.28)",
+    tools: ["Midjourney"],
+    ru: { title: "Rosalía", format: "AI-фотосессия по мотивам тура LUX, 7 кадров",
+          desc: "Альбом LUX Росалии — путь от земного к небесному через веру и трансформацию. Я взяла свет как главный инструмент серии.<br><br>Все кадры полностью созданы в нейросетях. Это моя авторская интерпретация и благодарность за музыку, которую хочется видеть." },
+    en: { title: "Rosalía", format: "AI photoshoot inspired by the LUX tour, 7 frames",
+          desc: "Rosalía's LUX album traces a journey from the earthly to the celestial, through faith and transformation. I used light as the series' core tool.<br><br>Every frame is fully AI-generated. This is my own interpretation, a thank-you for music that asks to be seen." }
   }
 ];
 const categories = {
