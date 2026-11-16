@@ -234,6 +234,8 @@
   .pv-caption { position: absolute; left: 20px; top: 20px; right: 70px; display: flex; flex-direction: column; gap: 2px; color: #fff; }
   .pv-title { font-size: .98rem; font-weight: 500; letter-spacing: -.01em; }
   .pv-format { font-size: .82rem; color: rgba(255,255,255,.65); }
+  .pv-disclaimer-tag { display: inline-block; align-self: flex-start; margin-top: 6px; font-size: .68rem; font-weight: 600; letter-spacing: .02em;
+    padding: 3px 9px; border-radius: 999px; background: rgba(255,255,255,.14); color: rgba(255,255,255,.75); }
   .pv-close { position: absolute; top: 16px; right: 16px; z-index: 3;
     width: 42px; height: 42px; border-radius: 50%; border: 0; cursor: pointer;
     display: grid; place-items: center; background: rgba(255,255,255,.12); color: #fff; transition: background .25s; }
@@ -831,7 +833,7 @@ function renderModalContent(p) {
   const badge = p.badge && badges[p.badge] ? `<span class="badge">${badges[p.badge][lang]}</span>` : "";
   const tools = p.tools.length
     ? `<p class="tools-label">${dict[lang]["case.tools"]}</p><ul class="tools">${p.tools.map(x => `<li>${x}</li>`).join("")}</ul>` : "";
-  pmCaption.innerHTML = `<span class="pv-title">${t.title}</span><span class="pv-format">${t.format}</span>`;
+  pmCaption.innerHTML = `<span class="pv-title">${t.title}</span><span class="pv-format">${t.format}</span><span class="pv-disclaimer-tag">${dict[lang]["case.disclaimer.short"]}</span>`;
   pmInfo.innerHTML = `
     <div class="pv-info-top">
       <p class="case-type">${cat}${badge}</p>
@@ -918,6 +920,7 @@ const dict = {
     "tab.home": "Главная", "nav.about": "Обо мне", "nav.work": "AI-проекты", "nav.contact": "Контакты", "name.first": "Надина", "name.last": "Ширина", "name.full": "Надина Ширина",
     "share.copied": "Ссылка скопирована", "share.copyLink": "Скопировать ссылку",
     "case.disclaimer": "Некоммерческий проект. Выполнен в учебных целях, без заказа бренда.",
+    "case.disclaimer.short": "Некоммерческий проект",
     "process.title": "Как я работаю",
     "process.sub": "Пять шагов от идеи до готового видео.",
     "process.1t": "Бриф", "process.1d": "Присылаете бриф: задача, бренд, срок.",
@@ -960,6 +963,7 @@ const dict = {
     "tab.home": "Home", "nav.about": "About", "nav.work": "AI Projects", "nav.contact": "Contact", "name.first": "Nadina", "name.last": "Shirina", "name.full": "Nadina Shirina",
     "share.copied": "Link copied", "share.copyLink": "Copy link",
     "case.disclaimer": "Non-commercial project. Made for educational purposes, not commissioned by the brand.",
+    "case.disclaimer.short": "Non-commercial project",
     "process.title": "How I work",
     "process.sub": "Five steps from idea to finished video.",
     "process.1t": "Brief", "process.1d": "Send a brief: the task, the brand, the deadline.",
