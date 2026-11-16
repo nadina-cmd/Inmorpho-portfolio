@@ -324,8 +324,10 @@
     font-weight: 400; font-size: clamp(2.3rem, 5vw, 4.4rem); line-height: 1.15; letter-spacing: 0; }
   .contact .h2 .w { padding: .12em .12em .28em; margin: -.12em -.12em -.28em; }
   .cline { display: flex; flex-direction: column; align-items: center; gap: 10px; margin-top: clamp(20px, 3vw, 32px); }
-  .sub-arrow { display: inline-flex; align-items: center; justify-content: center; min-width: 40px; min-height: 40px; margin: -10px -8px; padding: 0; font-size: 1.25em; color: var(--accent); font-weight: 600; cursor: pointer; transition: transform .35s var(--glide), color .25s; }
-  .sub-arrow:hover, .sub-arrow:focus-visible { transform: translateY(3px); color: var(--text); }
+  .sub-arrow { display: inline-flex; align-items: center; justify-content: center; min-width: 40px; min-height: 40px; margin: -11px -11px -11px -4px; padding: 0; vertical-align: middle; cursor: pointer; transition: transform .35s var(--glide); }
+  .sub-arrow .ico-img { width: 18px; height: 18px; border-radius: 4px; opacity: .85; transition: opacity .3s; }
+  .sub-arrow:hover, .sub-arrow:focus-visible { transform: translateY(3px); }
+  .sub-arrow:hover .ico-img, .sub-arrow:focus-visible .ico-img { opacity: 1; }
   .citem { display: inline-flex; align-items: center; gap: 9px; padding: 6px 2px; font-size: clamp(1rem, 1.3vw, 1.12rem); color: var(--text); }
   
   .citem span { background: linear-gradient(currentColor, currentColor) 0 100% / 0 1px no-repeat; transition: background-size .45s var(--ease); padding-bottom: 2px; }
@@ -619,7 +621,7 @@
   <section id="contact" class="contact">
     <div class="wrap">
       <h2 class="h2" data-split="rise" data-i18n="contact.title">Every brand has its own story. Let's create yours.</h2>
-      <p class="sub" data-reveal><span data-i18n="contact.sub"></span> <a class="sub-arrow" href="#" id="briefLink" target="_blank" rel="noopener" aria-label="Send the brief">↓</a></p>
+      <p class="sub" data-reveal><span data-i18n="contact.sub"></span> <a class="sub-arrow" href="#" id="briefLink" target="_blank" rel="noopener" aria-label="Send the brief"><svg class="ico ico-img" viewBox="0 0 24 24" aria-hidden="true"><rect width="24" height="24" rx="5.3" fill="#000"/><g transform="translate(12 12) scale(.62) translate(-12 -12)" fill="none" stroke="#fff" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="3" width="14" height="18" rx="2.2"/><circle cx="8.3" cy="8.6" r=".9"/><path d="M11.3 8.6h5.2"/><circle cx="8.3" cy="12.6" r=".9"/><path d="M11.3 12.6h5.2"/><circle cx="8.3" cy="16.6" r=".9"/><path d="M11.3 16.6h3.4"/></g></svg></a></p>
 
       <div class="cline" data-reveal style="--d:.1s">
         <!-- ПРАЙС: ссылка задаётся в PRICE_URL в скрипте -->
