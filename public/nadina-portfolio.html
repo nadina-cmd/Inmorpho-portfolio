@@ -324,8 +324,8 @@
     font-weight: 400; font-size: clamp(2.3rem, 5vw, 4.4rem); line-height: 1.15; letter-spacing: 0; }
   .contact .h2 .w { padding: .12em .12em .28em; margin: -.12em -.12em -.28em; }
   .cline { display: flex; flex-direction: column; align-items: center; gap: 10px; margin-top: clamp(20px, 3vw, 32px); }
-  .sub-arrow { display: inline-block; color: var(--accent); font-weight: 600; transition: transform .35s var(--glide), color .25s; }
-  .sub-arrow:hover { transform: translateY(3px); color: var(--text); }
+  .sub-arrow { display: inline-flex; align-items: center; justify-content: center; min-width: 40px; min-height: 40px; margin: -10px -8px; padding: 0; font-size: 1.25em; color: var(--accent); font-weight: 600; cursor: pointer; transition: transform .35s var(--glide), color .25s; }
+  .sub-arrow:hover, .sub-arrow:focus-visible { transform: translateY(3px); color: var(--text); }
   .citem { display: inline-flex; align-items: center; gap: 9px; padding: 6px 2px; font-size: clamp(1rem, 1.3vw, 1.12rem); color: var(--text); }
   
   .citem span { background: linear-gradient(currentColor, currentColor) 0 100% / 0 1px no-repeat; transition: background-size .45s var(--ease); padding-bottom: 2px; }
