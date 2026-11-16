@@ -234,7 +234,8 @@
   .pv-caption { position: absolute; left: 20px; top: 20px; right: 70px; display: flex; flex-direction: column; gap: 2px; color: #fff; }
   .pv-title { font-size: .98rem; font-weight: 500; letter-spacing: -.01em; }
   .pv-format { font-size: .82rem; color: rgba(255,255,255,.65); }
-  .pv-disclaimer-tag { display: inline-block; align-self: flex-start; margin-top: 6px; font-size: .68rem; font-weight: 600; letter-spacing: .02em;
+  .pv-tags { display: flex; gap: 6px; margin-top: 6px; flex-wrap: wrap; }
+  .pv-disclaimer-tag { display: inline-block; font-size: .68rem; font-weight: 600; letter-spacing: .02em;
     padding: 3px 9px; border-radius: 999px; background: rgba(255,255,255,.14); color: rgba(255,255,255,.75); }
   .pv-close { position: absolute; top: 16px; right: 16px; z-index: 3;
     width: 42px; height: 42px; border-radius: 50%; border: 0; cursor: pointer;
@@ -833,7 +834,8 @@ function renderModalContent(p) {
   const badge = p.badge && badges[p.badge] ? `<span class="badge">${badges[p.badge][lang]}</span>` : "";
   const tools = p.tools.length
     ? `<p class="tools-label">${dict[lang]["case.tools"]}</p><ul class="tools">${p.tools.map(x => `<li>${x}</li>`).join("")}</ul>` : "";
-  pmCaption.innerHTML = `<span class="pv-title">${t.title}</span><span class="pv-format">${t.format}</span><span class="pv-disclaimer-tag">${dict[lang]["case.disclaimer.short"]}</span>`;
+  const badgeTag = p.badge && badges[p.badge] ? `<span class="pv-disclaimer-tag">${badges[p.badge][lang]}</span>` : "";
+  pmCaption.innerHTML = `<span class="pv-title">${t.title}</span><span class="pv-format">${t.format}</span><span class="pv-tags">${badgeTag}<span class="pv-disclaimer-tag">${dict[lang]["case.disclaimer.short"]}</span></span>`;
   pmInfo.innerHTML = `
     <div class="pv-info-top">
       <p class="case-type">${cat}${badge}</p>
@@ -933,7 +935,7 @@ const dict = {
     "hero.cta1": "Смотреть работы", "hero.cta2": "Обсудить проект",
     "reel.label": "Шоурил", "reel.hint": "Место для видео 16:9. Вставьте MP4 или кадр.",
     "about.title": "Обо мне",
-    "about.lead": "Брендам нужно видео, которое зацепит. Обычная съёмка требует недель подготовки и серьёзного бюджета. Я создаю такие фильмы целиком в нейросетях, сохраняя стиль и эмоцию бренда.",
+    "about.lead": "Брендам нужно видео с вниманием к деталям. Обычная съёмка требует недель подготовки и серьёзного бюджета. Я создаю такие фильмы целиком в нейросетях, сохраняя стиль и эмоцию бренда.",
     "about.photo": "Ваше фото",
     "about.f1t": "Мой путь",
     "about.f1": "Художественное образование и опыт в графическом дизайне научили меня видеть и строить кадр, а нейросети позволили мне передавать через анимацию чувства и смыслы. Так появляются эмоциональные видео, которые попадают в эстетику и философию бренда.",
@@ -976,7 +978,7 @@ const dict = {
     "hero.cta1": "View work", "hero.cta2": "Discuss a project",
     "reel.label": "Showreel", "reel.hint": "Video slot 16:9. Drop in an MP4 or a still.",
     "about.title": "About me",
-    "about.lead": "Brands need video that hooks the viewer. A conventional shoot takes weeks of preparation and a serious budget. I create these films entirely with AI, keeping the style and the emotion of the brand.",
+    "about.lead": "Brands need video with attention to detail. A conventional shoot takes weeks of preparation and a serious budget. I create these films entirely with AI, keeping the style and the emotion of the brand.",
     "about.photo": "Your portrait",
     "about.f1t": "My path",
     "about.f1": "An art education and work in graphic design taught me to see and build a frame, and AI has let me convey feeling and meaning through animation. This is how emotional videos appear that match a brand's aesthetic and philosophy.",
