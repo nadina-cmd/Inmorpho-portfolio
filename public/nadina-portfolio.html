@@ -8,18 +8,20 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Marck+Script&family=Bricolage+Grotesque:wght@500;600;700&display=swap" rel="stylesheet">
-<meta name="theme-color" content="#ece7e1">
+<meta name="theme-color" content="#e4e6eb">
 <style>
   /* ===== ТОКЕНЫ ===== */
   :root {
-    --bg: #ece7e1;             /* тёплый stone вместо холодного серого */
+    --bg: #e4e6eb;             /* холодное серебро вместо тёплого камня */
     --paper: #ffffff;
-    --text: #1c1917;
-    --muted: #756e67;
-    --dim: rgba(28,25,23,.18);
+    --text: #1b1c20;
+    --muted: #6b6e76;
+    --dim: rgba(27,28,32,.18);
     --line: rgba(0,0,0,.1);
-    --accent: #8a6d45;        /* минеральная бронза */
-    --frame: #111113;
+    --accent: #3a4a8a;        /* сложный ультрамарин */
+    --frame: #17181b;         /* глубокий графит */
+    --spot-accent: #3a4a8a;
+    --spot-silver: #aeb3bd;
     --font-display: "Bricolage Grotesque", -apple-system, BlinkMacSystemFont, "SF Pro Display", "Helvetica Neue", Arial, sans-serif;
     --radius-lg: 28px;
     --radius-md: 18px;
@@ -31,12 +33,12 @@
     padding-top: env(safe-area-inset-top, 0px);
     padding-bottom: env(safe-area-inset-bottom, 0px);
   }
-  @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --bg:#ece7e1; --text:#1c1917; } }
-  :root[data-theme="dark"] { --bg:#ece7e1; --text:#1c1917; }
+  @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --bg:#e4e6eb; --text:#1b1c20; } }
+  :root[data-theme="dark"] { --bg:#e4e6eb; --text:#1b1c20; }
   html { scroll-behavior: smooth; scroll-padding-top: calc(env(safe-area-inset-top, 0px) + 80px); }
   *, *::before, *::after { box-sizing: inherit; margin: 0; }
   body {
-    background: linear-gradient(180deg, #f5f1ec 0%, var(--bg) 45%, #d9cfc3 100%);
+    background: linear-gradient(180deg, #f2f3f6 0%, var(--bg) 45%, #cfd3db 100%);
     color: var(--text);
     font: 100%/1.55 -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display", "Helvetica Neue", "Segoe UI", Roboto, Arial, sans-serif;
     -webkit-font-smoothing: antialiased;
@@ -55,7 +57,7 @@
   .nav {
     position: fixed; top: 0; left: 0; right: 0; z-index: 50;
     padding-top: env(safe-area-inset-top, 0px);
-    background: rgba(236,231,225,.74);
+    background: rgba(228,230,235,.74);
     backdrop-filter: blur(20px) saturate(180%);
     -webkit-backdrop-filter: blur(20px) saturate(180%);
     border-bottom: 1px solid rgba(0,0,0,.06);
@@ -72,7 +74,7 @@
   @media (max-width: 420px) { .brand { font-size: .85rem; gap: 8px; } }
   .avatar { width: 32px; height: 32px; border-radius: 50%; object-fit: cover; flex: none; box-shadow: 0 0 0 1px rgba(0,0,0,.08); transition: transform .4s var(--ease); }
   .brand:hover .avatar { transform: scale(1.08); }
-  .progress { position: absolute; left: 0; bottom: -1px; height: 1.5px; width: 100%; background: linear-gradient(90deg, rgba(138,109,69,.35), var(--accent)); transform-origin: 0 50%; transform: scaleX(0); }
+  .progress { position: absolute; left: 0; bottom: -1px; height: 1.5px; width: 100%; background: linear-gradient(90deg, rgba(58,74,138,.35), var(--accent)); transform-origin: 0 50%; transform: scaleX(0); }
 
   /* сегментированный переключатель разделов */
   .tabs { position: relative; display: flex; gap: 2px; padding: 4px; background: rgba(0,0,0,.055); border-radius: 999px; }
@@ -122,6 +124,7 @@
   .hero { position: relative; display: flex; flex-direction: column; padding: 110px 0 clamp(28px, 4vw, 48px); isolation: isolate; }
   .hero-rule { height: 1px; background: var(--line); }
   #about {
+    position: relative; isolation: isolate;
     min-height: 100svh; display: flex; flex-direction: column; justify-content: center;
     padding-top: clamp(24px, 4vh, 56px); padding-bottom: clamp(24px, 4vh, 56px);
   }
@@ -132,6 +135,9 @@
     background: radial-gradient(22vmax 22vmax at var(--x, 50%) var(--y, 30%), rgba(255,255,255,.85), rgba(255,255,255,.3) 45%, transparent 72%);
   }
   .hero.lit .spot { opacity: 1; }
+  .color-spot { position: absolute; z-index: -1; pointer-events: none; border-radius: 50%; filter: blur(80px); }
+  .hero .color-spot { width: 380px; height: 380px; top: -110px; right: -60px; background: var(--spot-accent); opacity: .22; }
+  #about .color-spot { width: 300px; height: 300px; left: -70px; bottom: -40px; background: var(--spot-silver); opacity: .35; }
   .kicker { color: var(--muted); font-size: clamp(.95rem, 1.1vw, 1.05rem); margin-bottom: 16px; letter-spacing: .01em; }
   .name {
     font-family: var(--font-display);
@@ -168,6 +174,8 @@
   section { padding: clamp(48px, 7vw, 96px) 0; }
   .h2 { font-family: var(--font-display); font-size: clamp(2rem, 4vw, 3.25rem); font-weight: 600; line-height: 1.08; letter-spacing: -.025em; }
   .sub { color: var(--muted); font-size: clamp(.95rem, 1.2vw, 1.12rem); max-width: none; margin-top: 10px; text-wrap: pretty; }
+  .sub-link { color: var(--accent); text-decoration: underline; text-underline-offset: 3px; text-decoration-color: rgba(58,74,138,.35); transition: text-decoration-color .25s var(--ease); }
+  .sub-link:hover { text-decoration-color: var(--accent); }
 
   .lead { font-size: clamp(1rem, 1.6vh, 1.6rem); line-height: 1.35; letter-spacing: -.02em; font-weight: 400; max-width: none; margin-top: clamp(10px, 2vh, 18px); text-wrap: pretty; }
   .about-grid { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: clamp(16px, 3vw, 40px); margin-top: clamp(14px, 3vh, 36px); align-items: center; }
@@ -204,8 +212,8 @@
   @media (min-width: 1024px) { .step h3 { font-size: 1.15rem; } .step p { font-size: 1rem; } }
 
   .cases { display: grid; grid-template-columns: 1fr; gap: 14px; margin-top: clamp(24px, 3.5vw, 44px); }
-  @media (min-width: 640px) { .cases { grid-template-columns: repeat(2, 1fr); gap: 16px; } }
-  @media (min-width: 1024px) { .cases { grid-template-columns: repeat(3, 1fr); gap: 18px; } }
+  @media (min-width: 640px) { .cases { grid-template-columns: repeat(2, 1fr); gap: 16px; grid-auto-flow: dense; } .tile.tile-featured { grid-column: span 2; } }
+  @media (min-width: 1024px) { .cases { grid-template-columns: repeat(3, 1fr); gap: 18px; grid-auto-flow: dense; } .tile.tile-featured { grid-column: span 2; } }
   .case-type { color: var(--accent); font-size: .95rem; font-weight: 500; margin-bottom: 6px; }
   .case-title { font-family: var(--font-display); font-size: clamp(1.45rem, 2.2vw, 1.9rem); font-weight: 600; line-height: 1.12; letter-spacing: -.015em; }
   .case-desc { color: var(--muted); font-size: 1rem; }
@@ -234,7 +242,7 @@
 
   /* ===== ОКНО ПРОСМОТРА ===== */
   .pm { position: fixed; inset: 0; z-index: 85; overflow-y: auto;
-    background: #53565a;
+    background: var(--frame);
     opacity: 0; visibility: hidden; transition: opacity .4s var(--ease), visibility 0s .4s; }
   .pm.open { opacity: 1; visibility: visible; transition: opacity .4s var(--ease); }
   .pv-stage { position: relative; min-height: 100vh; min-height: 100svh; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 72px 16px 60px; }
@@ -264,7 +272,7 @@
     .pv-media { height: min(58vh, 520px); }
   }
 
-  .pv-info { background: #53565a; color: #fff; padding: 8px clamp(20px, 5vw, 56px) clamp(40px, 6vw, 72px); }
+  .pv-info { position: relative; background: var(--frame); color: #fff; padding: 8px clamp(20px, 5vw, 56px) clamp(40px, 6vw, 72px); overflow: hidden; }
   @media (min-width: 900px) {
     .pm { display: flex; flex-direction: row-reverse; align-items: center; justify-content: center; gap: clamp(24px, 4vw, 56px); overflow: hidden; }
     .pv-stage { flex: 0 1 auto; min-height: 0; padding: 0; }
@@ -276,7 +284,12 @@
     .pv-caption { display: none; }
   }
   .pv-info-top { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
-  .pv-info .case-type { color: #d9c3a3; }
+  .pv-info .case-type { color: #a9b6ea; }
+  .pv-info::before {
+    content: ""; position: absolute; z-index: -1; pointer-events: none;
+    width: 320px; height: 320px; border-radius: 50%; filter: blur(70px);
+    background: var(--spot-accent); opacity: .3; bottom: -120px; right: -100px;
+  }
   .pv-info .case-title { color: #fff; margin-top: 10px; }
   .pv-info .case-format { color: rgba(255,255,255,.65); }
   .pv-info .case-desc { color: rgba(255,255,255,.78); }
@@ -465,7 +478,7 @@
   }
   @media (prefers-reduced-transparency: reduce) {
     .nav, .toast { backdrop-filter: none; -webkit-backdrop-filter: none; }
-    .nav { background: #ece7e1; }
+    .nav { background: #e4e6eb; }
   }
 
   /* ===== КОМПЬЮТЕР: крупнее текст ===== */
@@ -517,6 +530,7 @@
   <!-- ===== ГЛАВНАЯ ===== -->
   <section id="top" class="hero">
     <div class="spot" aria-hidden="true"></div>
+    <div class="color-spot" aria-hidden="true"></div>
     <div class="wrap">
       <p class="kicker" data-i18n="hero.kicker">InMorpho Studio</p>
       <h1 class="name"><span data-i18n="name.first">Nadina</span> <span data-i18n="name.last">Shirina</span></h1>
@@ -528,6 +542,7 @@
 
   <!-- ===== ОБО МНЕ ===== -->
   <section id="about">
+    <div class="color-spot" aria-hidden="true"></div>
     <div class="wrap">
       <h2 class="h2" data-split="rise" data-i18n="about.title">About</h2>
       <p class="lead" data-split="light" data-i18n="about.lead">I make short films for fashion and lifestyle brands.</p>
@@ -596,7 +611,7 @@
   <section id="contact" class="contact">
     <div class="wrap">
       <h2 class="h2" data-split="rise" data-i18n="contact.title">Every brand has its own story. Let's create yours.</h2>
-      <p class="sub" data-reveal data-i18n="contact.sub"></p>
+      <p class="sub" data-reveal><a class="sub-link" href="#" id="briefLink" target="_blank" rel="noopener" data-i18n="contact.subLink"></a><span data-i18n="contact.subRest"></span></p>
 
       <div class="cline" data-reveal style="--d:.1s">
         <!-- ПРАЙС: ссылка задаётся в PRICE_URL в скрипте -->
@@ -677,7 +692,7 @@ const projects = [
           desc: "Rosalía's LUX album traces a journey from the earthly to the celestial, through faith and transformation. I used light as the series' core tool.<br><br>Every frame is fully AI-generated. This is my own interpretation, a thank-you for music that asks to be seen." }
   },
   {
-    id: "le-smoking",
+    id: "le-smoking", featured: true,
     category: "storytelling", badge: "personal", media: "", video: "le-smoking", cover: "le-smoking-cover", ratio: "4 / 3", tone: "rgba(200,200,200,.22)",
     tools: ["Midjourney", "Nano Banana", "GPT Image", "Seedance 2.5", "Kling"],
     ru: { title: "Le Smoking", format: "Историческая короткометражка, 1 минута",
@@ -686,9 +701,9 @@ const projects = [
           desc: "New York, the late sixties. Nan Kempner is turned away from La Côte Basque for wearing Yves Saint Laurent's tuxedo trousers, so she returns in the jacket alone, worn as a mini dress. A cinematic brand story where the character of Le Smoking is clear within a minute." }
   },
   {
-    id: "agmes",
+    id: "agmes", featured: true,
     category: "brand", badge: "spec", media: "",
-    series: [{ id: "agmes-bracelets", name: "Bracelets" }, { id: "agmes-heart", name: "Heart" }, { id: "agmes-earrings", name: "Earrings" }], tone: "rgba(217,196,163,.32)",
+    series: [{ id: "agmes-heart", name: "Heart" }, { id: "agmes-bracelets", name: "Bracelets" }, { id: "agmes-earrings", name: "Earrings" }], tone: "rgba(217,196,163,.32)",
     tools: ["Midjourney", "Nano Banana", "GPT Image", "Seedance 2.0", "Kling"],
     ru: { title: "AGMES", format: "Серия видео для бренда",
           desc: "У AGMES лаконичные скульптурные формы, будто обточенные природой. Я перенесла их в пустыню, где песок, вода и свет повторяют линии украшений, а тишина оставляет взгляд наедине с деталью. Три части показывают браслеты, подвеску-сердце и серьги. Серия сделана по собственной инициативе как питч бренду." },
@@ -706,7 +721,7 @@ const projects = [
   },
   {
     id: "pomegranate",
-    category: "mood", badge: "personal", media: "", video: "pomegranate", cover: "pomegranate-cover", ratio: "9 / 16", vertical: true, tone: "rgba(160,40,50,.3)",
+    category: "brand", badge: "personal", media: "", video: "pomegranate", cover: "pomegranate-cover", ratio: "9 / 16", vertical: true, tone: "rgba(160,40,50,.3)",
     tools: ["Midjourney", "Nano Banana", "Kling"],
     ru: { title: "Pomegranate", format: "Визуальный этюд, 36 секунд",
           desc: "Бархат, гранат и красное вино. Этюд о чувственности, рассказанный через фактуры и крупные детали. Настроение здесь важнее сюжета." },
@@ -723,7 +738,7 @@ const projects = [
           desc: "My experiment with the format. Behind the scenes of a shoot that never happened, with subway escalators, lighting, camera and the final look in red lace and Miu Miu glasses. The film crew was generated too." }
   },
   {
-    id: "mushrooms",
+    id: "mushrooms", featured: true,
     category: "creative", badge: "personal", media: "", video: "mushrooms", tone: "rgba(150,150,140,.28)",
     tools: ["Midjourney", "Nano Banana", "Kling"],
     ru: { title: "Mushrooms", format: "Арт-ролик о природе и украшениях, 36 секунд",
@@ -738,7 +753,6 @@ const categories = {
   storytelling: { ru: "Кино",             en: "Cinematic" },
   social:       { ru: "Reels и Shorts",   en: "Reels & Shorts" },
   homestaging:  { ru: "AI-визуализация интерьеров", en: "AI home staging" },
-  mood:         { ru: "Фильм-настроение", en: "Mood film" },
   photo:        { ru: "AI-фотосессия",    en: "AI Photoshoot" },
   creative:     { ru: "Креатив",          en: "Creative" }
 };
@@ -775,7 +789,7 @@ function renderCases() {
     const t = p[lang] || p.en;
     const cat = (categories[p.category] || {})[lang] || "";
     return `
-      <button class="tile" type="button" data-id="${p.id}" data-category="${p.category}" aria-label="${t.title}">
+      <button class="tile${p.featured ? " tile-featured" : ""}" type="button" data-id="${p.id}" data-category="${p.category}" aria-label="${t.title}">
         ${tileCoverMarkup(p)}
         <div class="tile-top"><span class="tile-cat">${cat}</span><span class="tile-icon">${arrowIcon("next")}</span></div>
       </button>`;
@@ -969,7 +983,8 @@ const dict = {
     "case4.type": "Бренд-фильм", "case4.title": "Название проекта",
     "case5.type": "AI-хоумстейджинг", "case5.title": "Название проекта",
     "contact.title": "У каждого бренда своя история. Создадим вашу.",
-    "contact.sub": "Расскажите о бренде и задаче, а я предложу идею и формат.",
+    "contact.subLink": "Расскажите о бренде и задаче",
+    "contact.subRest": ", а я предложу идею и формат.",
     "contact.write": "Написать мне", "contact.copy": "Копировать", "contact.copied": "Адрес скопирован", "contact.price": "Прайс по запросу", "contact.priceReady": "Прайс", "sheet.title": "Написать на почту", "sheet.app": "Почтовое приложение", "sheet.copy": "Скопировать адрес", "sheet.cancel": "Отмена", "contact.mailHint": "Адрес скопирован. Если почта не открылась, вставьте его в новое письмо.",
     "contact.upworkVal": "Nadina S."
   },
@@ -1012,7 +1027,8 @@ const dict = {
     "case4.type": "Brand film", "case4.title": "Project title",
     "case5.type": "AI home staging", "case5.title": "Project title",
     "contact.title": "Every brand has its own story. Let's create yours.",
-    "contact.sub": "Tell me about your brand and the task. I'll come back with an idea and a format.",
+    "contact.subLink": "Tell me about your brand and the task",
+    "contact.subRest": ". I'll come back with an idea and a format.",
     "contact.write": "Write to me", "contact.copy": "Copy", "contact.copied": "Address copied", "contact.price": "Pricing on request", "contact.priceReady": "Pricing", "sheet.title": "Write an email", "sheet.app": "Mail app", "sheet.copy": "Copy address", "sheet.cancel": "Cancel", "contact.mailHint": "Address copied. If your mail app didn't open, paste it into a new email.",
     "contact.upworkVal": "Nadina S."
   }
@@ -1219,6 +1235,16 @@ if (PRICE_URL) {
 }
 const up = document.getElementById("upwork");
 if (up.getAttribute("href") === "#") { up.classList.add("soon"); up.setAttribute("aria-disabled","true"); up.tabIndex = -1; }
+
+/* ===== БРИФ: вставь ссылку на Google Drive / форму, когда будет готова ===== */
+const BRIEF_URL = "";
+const briefLink = document.getElementById("briefLink");
+if (BRIEF_URL) {
+  briefLink.href = BRIEF_URL;
+} else {
+  briefLink.removeAttribute("target"); briefLink.removeAttribute("rel");
+  briefLink.addEventListener("click", e => e.preventDefault());
+}
 
 /* ===== Старт ===== */
 let saved = null;
