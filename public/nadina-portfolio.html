@@ -242,8 +242,8 @@
     display: grid; place-items: center; background: rgba(255,255,255,.12); color: #fff; transition: background .25s; }
   .pv-close:hover { background: rgba(255,255,255,.22); }
   .pv-close svg { width: 17px; height: 17px; }
-  .pv-media { display: flex; align-items: center; justify-content: center; max-width: 100%; }
-  .pv-media video, .pv-media img { max-width: 100%; max-height: calc(100svh - 150px); width: auto; height: auto; border-radius: 10px; background: #000; display: block; }
+  .pv-media { display: flex; align-items: center; justify-content: center; max-width: 100%; height: min(70vh, 620px); }
+  .pv-media video, .pv-media img { height: 100%; width: auto; max-width: 100%; max-height: 100%; border-radius: 10px; background: #000; display: block; object-fit: contain; }
   .pv-nav { display: flex; align-items: center; justify-content: center; gap: 18px; margin-top: 18px; }
   .pv-nav[hidden] { display: none; }
   .pv-arrow { width: 38px; height: 38px; border-radius: 50%; border: 0; cursor: pointer; display: grid; place-items: center;
@@ -254,14 +254,18 @@
   @media (max-width: 640px) {
     .pv-caption { top: auto; bottom: 20px; left: 16px; right: 16px; }
     .pv-stage { padding-bottom: 96px; }
-    .pv-media video, .pv-media img { max-height: calc(100svh - 190px); }
+    .pv-media { height: min(58vh, 520px); }
   }
 
   .pv-info { background: #53565a; color: #fff; padding: 8px clamp(20px, 5vw, 56px) clamp(40px, 6vw, 72px); }
   @media (min-width: 900px) {
-    .pm { display: flex; flex-direction: row-reverse; overflow: hidden; }
-    .pv-stage { flex: 1; min-height: 100svh; }
-    .pv-info { flex: 0 0 400px; max-width: 400px; height: 100svh; overflow-y: auto; padding: 90px 36px 40px; display: flex; flex-direction: column; justify-content: flex-start; }
+    .pm { display: flex; flex-direction: row-reverse; align-items: center; justify-content: center; gap: clamp(24px, 4vw, 56px); overflow: hidden; }
+    .pv-stage { flex: 0 1 auto; min-height: 0; padding: 0; }
+    .pv-media { height: min(78vh, 680px); }
+    .pv-info { flex: 0 1 380px; max-width: 380px; max-height: 86svh; overflow-y: auto; padding: 0; display: flex; flex-direction: column; justify-content: center;
+      text-align: right; align-items: flex-end; }
+    .pv-info .tools { justify-content: flex-end; }
+    .pv-tags { justify-content: flex-end; }
     .pv-caption { display: none; }
   }
   .pv-info-top { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
