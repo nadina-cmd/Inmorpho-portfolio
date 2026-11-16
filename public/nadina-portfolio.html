@@ -278,17 +278,28 @@
     .pv-stage { flex: 0 1 auto; min-height: 0; padding: 0; }
     .pv-media { height: min(78vh, 680px); }
     .pv-info { flex: 0 1 380px; max-width: 380px; max-height: 86svh; overflow-y: auto; padding: 0; display: flex; flex-direction: column; justify-content: center;
-      text-align: right; align-items: flex-end; }
+      text-align: right; align-items: flex-end;
+      scrollbar-width: none; -ms-overflow-style: none; }
+    .pv-info::-webkit-scrollbar { display: none; width: 0; height: 0; }
     .pv-info .tools { justify-content: flex-end; }
     .pv-tags { justify-content: flex-end; }
     .pv-caption { display: none; }
+    /* текст подстраивается под высоту экрана, чтобы обходиться без скролла */
+    .pv-info .case-type { font-size: clamp(.82rem, .7rem + .5vh, 1.05rem); }
+    .pv-info .case-title { font-size: clamp(1.3rem, 1.05rem + 1.6vh, 2.3rem); margin-top: clamp(6px, 1vh, 10px); }
+    .pv-info .case-format { font-size: clamp(.82rem, .72rem + .5vh, 1.05rem); margin-top: clamp(4px, .8vh, 10px); }
+    .pv-info .case-desc { font-size: clamp(.86rem, .76rem + .55vh, 1.08rem); line-height: 1.5; margin-top: clamp(8px, 1.2vh, 14px) !important; }
+    .pv-info .tools-label { font-size: clamp(.68rem, .62rem + .3vh, .85rem); margin-top: clamp(8px, 1.4vh, 18px); }
+    .pv-info .tools { margin-top: clamp(4px, .8vh, 8px); gap: clamp(4px, .7vh, 8px); }
+    .pv-info .tools li { font-size: clamp(.7rem, .64rem + .3vh, .9rem); padding: clamp(4px, .8vh, 7px) clamp(9px, 1.4vw, 15px); }
+    .pv-info .case-disclaimer { font-size: clamp(.64rem, .6rem + .2vh, .76rem); margin-top: clamp(8px, 1.4vh, 16px); }
   }
   .pv-info-top { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
   .pv-info .case-type { color: #a9b6ea; }
   .pv-info::before {
     content: ""; position: absolute; z-index: -1; pointer-events: none;
     width: 320px; height: 320px; border-radius: 50%; filter: blur(70px);
-    background: var(--spot-accent); opacity: .3; bottom: -120px; right: -100px;
+    background: var(--spot-accent); opacity: .3; bottom: 0; right: -100px;
   }
   .pv-info .case-title { color: #fff; margin-top: 10px; }
   .pv-info .case-format { color: rgba(255,255,255,.65); }
@@ -302,10 +313,10 @@
   .pm-icon:hover { background: rgba(255,255,255,.18); }
   .pm-icon svg { width: 17px; height: 17px; }
   .pm-more { position: relative; }
-  .pm-menu { position: absolute; right: 0; top: calc(100% + 8px); min-width: 170px; background: #3f4245; border-radius: 14px;
-    box-shadow: 0 16px 40px -18px rgba(0,0,0,.5); padding: 6px; opacity: 0; visibility: hidden; transform: translateY(-6px);
-    transition: opacity .25s var(--ease), transform .25s var(--ease), visibility 0s .25s; }
-  .pm-menu.open { opacity: 1; visibility: visible; transform: none; transition: opacity .25s var(--ease), transform .25s var(--ease); }
+  .pm-menu { display: none; position: absolute; right: 0; top: calc(100% + 8px); min-width: 170px; background: #3f4245; border-radius: 14px;
+    box-shadow: 0 16px 40px -18px rgba(0,0,0,.5); padding: 6px; z-index: 2; }
+  .pm-menu.open { display: block; animation: menuPop .2s var(--ease); }
+  @keyframes menuPop { from { opacity: 0; transform: translateY(-6px); } to { opacity: 1; transform: none; } }
   .pm-menu button { width: 100%; text-align: left; font: inherit; font-size: .9rem; padding: 10px 12px; border-radius: 9px; border: 0; background: none; cursor: pointer; color: #fff; }
   .pm-menu button:hover { background: rgba(255,255,255,.1); }
 
@@ -865,11 +876,11 @@ function renderModalContent(p) {
   pmInfo.innerHTML = `
     <div class="pv-info-top">
       <p class="case-type">${cat}${badge}</p>
-      <div style="display:flex;gap:8px">
+      <div class="pm-more">
         <button class="pm-icon" type="button" id="pmShare" aria-label="Share"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M8 7h9v9"/></svg></button>
-        <div class="pm-more">
-          <button class="pm-icon" type="button" id="pmMore" aria-label="More"><svg viewBox="0 0 24 24" fill="currentColor"><circle cx="5" cy="12" r="1.8"/><circle cx="12" cy="12" r="1.8"/><circle cx="19" cy="12" r="1.8"/></svg></button>
-          <div class="pm-menu" id="pmMenu"><button type="button" id="pmCopyLink">${dict[lang]["share.copyLink"]}</button></div>
+        <div class="pm-menu" id="pmMenu">
+          <button type="button" id="pmShareAction">${dict[lang]["share.share"]}</button>
+          <button type="button" id="pmCopyLink">${dict[lang]["share.copyLink"]}</button>
         </div>
       </div>
     </div>
@@ -879,8 +890,8 @@ function renderModalContent(p) {
     ${tools}
     <p class="case-disclaimer">${dict[lang]["case.disclaimer"]}</p>`;
   pmMenuEl = document.getElementById("pmMenu");
-  document.getElementById("pmShare").addEventListener("click", shareLink);
-  document.getElementById("pmMore").addEventListener("click", () => pmMenuEl.classList.toggle("open"));
+  document.getElementById("pmShare").addEventListener("click", () => pmMenuEl.classList.toggle("open"));
+  document.getElementById("pmShareAction").addEventListener("click", () => { shareLink(); closeMenu(); });
   document.getElementById("pmCopyLink").addEventListener("click", () => {
     const url = location.origin + location.pathname + "#project=" + currentProjectId;
     navigator.clipboard?.writeText(url).then(() => showToast(dict[lang]["share.copied"])).catch(() => showToast(url));
@@ -946,7 +957,7 @@ function renderToolkit() {
 const dict = {
   ru: {
     "tab.home": "Главная", "nav.about": "Обо мне", "nav.work": "AI-проекты", "nav.contact": "Контакты", "name.first": "Надина", "name.last": "Ширина", "name.full": "Надина Ширина",
-    "share.copied": "Ссылка скопирована", "share.copyLink": "Скопировать ссылку",
+    "share.copied": "Ссылка скопирована", "share.copyLink": "Скопировать ссылку", "share.share": "Поделиться",
     "case.disclaimer": "Некоммерческий проект. Выполнен в учебных целях, без заказа бренда.",
     "case.disclaimer.short": "Некоммерческий проект",
     "process.title": "Как я работаю",
@@ -990,7 +1001,7 @@ const dict = {
   },
   en: {
     "tab.home": "Home", "nav.about": "About", "nav.work": "AI Projects", "nav.contact": "Contact", "name.first": "Nadina", "name.last": "Shirina", "name.full": "Nadina Shirina",
-    "share.copied": "Link copied", "share.copyLink": "Copy link",
+    "share.copied": "Link copied", "share.copyLink": "Copy link", "share.share": "Share",
     "case.disclaimer": "Non-commercial project. Made for educational purposes, not commissioned by the brand.",
     "case.disclaimer.short": "Non-commercial project",
     "process.title": "How I work",
