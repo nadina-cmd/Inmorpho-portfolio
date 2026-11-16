@@ -545,6 +545,19 @@
     </div>
   </section>
 
+  <!-- ===== РАБОТЫ =====
+       Кадр: замени внутренний div.ph на <img src="..." alt="..."> или
+       <video src="..." autoplay muted loop playsinline></video>
+       Тексты проектов правятся в словаре внизу файла (ключи case1..case5). -->
+  <section id="work">
+    <div class="wrap">
+      <h2 class="h2" data-split="rise" data-i18n="work.title">Stories</h2>
+      <div class="cat-filters" id="catFilters" data-reveal role="group" aria-label="Filter by category"></div>
+
+      <div class="cases" id="cases"></div>
+    </div>
+  </section>
+
   <!-- ===== КАК Я РАБОТАЮ ===== -->
   <section id="process">
     <div class="wrap">
@@ -561,19 +574,6 @@
         <div class="step-arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg></div>
         <div class="step"><span class="step-num">05</span><h3 data-i18n="process.5t">Product</h3><p data-i18n="process.5d"></p></div>
       </div>
-    </div>
-  </section>
-
-  <!-- ===== РАБОТЫ =====
-       Кадр: замени внутренний div.ph на <img src="..." alt="..."> или
-       <video src="..." autoplay muted loop playsinline></video>
-       Тексты проектов правятся в словаре внизу файла (ключи case1..case5). -->
-  <section id="work">
-    <div class="wrap">
-      <h2 class="h2" data-split="rise" data-i18n="work.title">Stories</h2>
-      <div class="cat-filters" id="catFilters" data-reveal role="group" aria-label="Filter by category"></div>
-
-      <div class="cases" id="cases"></div>
     </div>
   </section>
 
@@ -935,7 +935,7 @@ const dict = {
     "about.f1t": "Мой путь",
     "about.f1": "Художественное образование и опыт в графическом дизайне научили меня видеть и строить кадр, а нейросети позволили мне передавать через анимацию чувства и смыслы. Так появляются эмоциональные видео, которые попадают в эстетику и философию бренда.",
     "about.f2t": "Что я делаю",
-    "about.f2": "Бренд-фильмы · Рекламные кампании · Фешн-видео · Короткометражки",
+    "about.f2": "Бренд-фильмы · Рекламные кампании · Фешн-видео · Кино · AI-фотосессии",
     "about.f3t": "Как я работаю",
     "about.f3": "Изучение ДНК бренда, концепция, сценарий, раскадровка, генерация и монтаж в одних руках. Генеративное видео снимает ограничения классической съёмки. Любую эпоху и любое пространство можно построить без площадки, логистики и актёров, а идею клиент видит и правит задолго до финальной версии.",
     "tk.title": "Инструменты",
@@ -977,7 +977,7 @@ const dict = {
     "about.f1t": "My path",
     "about.f1": "An art education and work in graphic design taught me to see and build a frame, and AI has let me convey feeling and meaning through animation. This is how emotional videos appear that match a brand's aesthetic and philosophy.",
     "about.f2t": "What I make",
-    "about.f2": "Brand films · Campaigns · Fashion editorial · Short films",
+    "about.f2": "Brand films · Campaigns · Fashion editorial · Cinematic · AI Photoshoots",
     "about.f3t": "How I work",
     "about.f3": "Brand DNA research, concept, script, storyboard, generation and edit in one pair of hands. Generative video removes the limits of a conventional shoot. Any era or space can be built without a set, logistics or a cast, and the client sees and adjusts the idea long before the final cut.",
     "tk.title": "Tools",
@@ -1075,7 +1075,7 @@ brandEl.addEventListener("click", () => {
 brandEl.addEventListener("animationend", e => { if (e.target === brandEl) brandEl.classList.remove("pulse"); });
 window.addEventListener("scroll", () => { if (spyLock) releaseLock(160); }, { passive: true });
 
-const sections = ["top", "about", "process", "work", "contact"].map(id => document.getElementById(id)).filter(el => el && !el.hidden);
+const sections = ["top", "about", "work", "process", "contact"].map(id => document.getElementById(id)).filter(el => el && !el.hidden);
 function spy() {
   if (spyLock) return;
   const probe = nav.offsetHeight + window.innerHeight * 0.3;
