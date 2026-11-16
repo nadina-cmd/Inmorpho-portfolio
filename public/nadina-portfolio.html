@@ -192,8 +192,13 @@
   .step-arrow { flex: 0 0 28px; display: flex; align-items: center; justify-content: center; color: var(--muted); opacity: .55; }
   .step-arrow svg { width: 18px; height: 18px; }
   @media (max-width: 820px) {
-    .steps { flex-direction: column; gap: 2px; }
-    .step-arrow { flex-basis: 28px; transform: rotate(90deg); }
+    .steps { flex-direction: column; gap: 6px; margin-top: 16px; }
+    .step { flex: 0 0 auto; display: flex; align-items: baseline; flex-wrap: wrap; column-gap: 10px; padding: 11px 16px; }
+    .step-num { font-size: .85rem; margin-bottom: 0; flex: none; }
+    .step h3 { font-size: .92rem; margin-bottom: 0; flex: none; }
+    .step p { flex-basis: 100%; font-size: .82rem; margin-top: 2px; }
+    .step-arrow { flex-basis: 16px; height: 16px; opacity: .4; transform: rotate(90deg); }
+    .step-arrow svg { width: 13px; height: 13px; }
   }
   @media (min-width: 1024px) { .step h3 { font-size: 1.15rem; } .step p { font-size: 1rem; } }
 
