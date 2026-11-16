@@ -7,19 +7,20 @@
 <meta name="description" content="Nadina Shirina, InMorpho Studio. AI films for fashion and lifestyle brands with a sense of style and an emotion that holds the viewer.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Marck+Script&display=swap" rel="stylesheet">
-<meta name="theme-color" content="#e9e9ec">
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Marck+Script&family=Bricolage+Grotesque:wght@500;600;700&display=swap" rel="stylesheet">
+<meta name="theme-color" content="#ece7e1">
 <style>
   /* ===== ТОКЕНЫ ===== */
   :root {
-    --bg: #e9e9ec;            /* светло-серый, как apple.com */
+    --bg: #ece7e1;             /* тёплый stone вместо холодного серого */
     --paper: #ffffff;
-    --text: #1d1d1f;
-    --muted: #6e6e73;
-    --dim: rgba(29,29,31,.18);
+    --text: #1c1917;
+    --muted: #756e67;
+    --dim: rgba(28,25,23,.18);
     --line: rgba(0,0,0,.1);
     --accent: #8a6d45;        /* минеральная бронза */
     --frame: #111113;
+    --font-display: "Bricolage Grotesque", -apple-system, BlinkMacSystemFont, "SF Pro Display", "Helvetica Neue", Arial, sans-serif;
     --radius-lg: 28px;
     --radius-md: 18px;
     --max: 1240px;
@@ -30,12 +31,12 @@
     padding-top: env(safe-area-inset-top, 0px);
     padding-bottom: env(safe-area-inset-bottom, 0px);
   }
-  @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --bg:#e9e9ec; --text:#1d1d1f; } }
-  :root[data-theme="dark"] { --bg:#e9e9ec; --text:#1d1d1f; }
+  @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --bg:#ece7e1; --text:#1c1917; } }
+  :root[data-theme="dark"] { --bg:#ece7e1; --text:#1c1917; }
   html { scroll-behavior: smooth; scroll-padding-top: calc(env(safe-area-inset-top, 0px) + 80px); }
   *, *::before, *::after { box-sizing: inherit; margin: 0; }
   body {
-    background: linear-gradient(180deg, #f2f2f4 0%, var(--bg) 45%, #c7c7cc 100%);
+    background: linear-gradient(180deg, #f5f1ec 0%, var(--bg) 45%, #d9cfc3 100%);
     color: var(--text);
     font: 100%/1.55 -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display", "Helvetica Neue", "Segoe UI", Roboto, Arial, sans-serif;
     -webkit-font-smoothing: antialiased;
@@ -54,13 +55,13 @@
   .nav {
     position: fixed; top: 0; left: 0; right: 0; z-index: 50;
     padding-top: env(safe-area-inset-top, 0px);
-    background: rgba(233,233,236,.74);
+    background: rgba(236,231,225,.74);
     backdrop-filter: blur(20px) saturate(180%);
     -webkit-backdrop-filter: blur(20px) saturate(180%);
     border-bottom: 1px solid rgba(0,0,0,.06);
   }
   .nav .wrap { display: flex; align-items: center; justify-content: space-between; min-height: 60px; gap: 16px; }
-  .brand { display: inline-flex; align-items: center; gap: 10px; font-weight: 600; font-size: .95rem; letter-spacing: -.01em; white-space: nowrap;
+  .brand { display: inline-flex; align-items: center; gap: 10px; font-family: var(--font-display); font-weight: 600; font-size: .95rem; letter-spacing: -.01em; white-space: nowrap;
     padding: 4px 14px 4px 4px; margin-left: -4px; border-radius: 999px; transition: background .3s var(--ease), transform .25s var(--ease), box-shadow .3s var(--ease); }
   .brand-role { font-weight: 400; color: var(--muted); }
   .brand:active { transform: scale(.96); background: rgba(255,255,255,.9); }
@@ -133,7 +134,7 @@
   .hero.lit .spot { opacity: 1; }
   .kicker { color: var(--muted); font-size: clamp(.95rem, 1.1vw, 1.05rem); margin-bottom: 16px; letter-spacing: .01em; }
   .name {
-    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Helvetica Neue", Arial, sans-serif;
+    font-family: var(--font-display);
     font-weight: 500; font-size: clamp(2.6rem, 8vw, 6.5rem);
     line-height: .9; letter-spacing: -.05em;
   }
@@ -165,7 +166,7 @@
 
   /* ===== СЕКЦИИ ===== */
   section { padding: clamp(48px, 7vw, 96px) 0; }
-  .h2 { font-size: clamp(2rem, 4vw, 3.25rem); font-weight: 500; line-height: 1.08; letter-spacing: -.035em; }
+  .h2 { font-family: var(--font-display); font-size: clamp(2rem, 4vw, 3.25rem); font-weight: 600; line-height: 1.08; letter-spacing: -.025em; }
   .sub { color: var(--muted); font-size: clamp(.95rem, 1.2vw, 1.12rem); max-width: none; margin-top: 10px; text-wrap: pretty; }
 
   .lead { font-size: clamp(1rem, 1.6vh, 1.6rem); line-height: 1.35; letter-spacing: -.02em; font-weight: 400; max-width: none; margin-top: clamp(10px, 2vh, 18px); text-wrap: pretty; }
@@ -206,7 +207,7 @@
   @media (min-width: 640px) { .cases { grid-template-columns: repeat(2, 1fr); gap: 16px; } }
   @media (min-width: 1024px) { .cases { grid-template-columns: repeat(3, 1fr); gap: 18px; } }
   .case-type { color: var(--accent); font-size: .95rem; font-weight: 500; margin-bottom: 6px; }
-  .case-title { font-size: clamp(1.45rem, 2.2vw, 1.9rem); font-weight: 500; line-height: 1.12; letter-spacing: -.025em; }
+  .case-title { font-family: var(--font-display); font-size: clamp(1.45rem, 2.2vw, 1.9rem); font-weight: 600; line-height: 1.12; letter-spacing: -.015em; }
   .case-desc { color: var(--muted); font-size: 1rem; }
   .case-disclaimer { margin-top: 16px; font-size: .78rem; color: var(--muted); font-style: italic; }
 
@@ -464,7 +465,7 @@
   }
   @media (prefers-reduced-transparency: reduce) {
     .nav, .toast { backdrop-filter: none; -webkit-backdrop-filter: none; }
-    .nav { background: #e9e9ec; }
+    .nav { background: #ece7e1; }
   }
 
   /* ===== КОМПЬЮТЕР: крупнее текст ===== */
