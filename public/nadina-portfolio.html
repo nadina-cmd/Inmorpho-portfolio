@@ -212,8 +212,8 @@
   @media (min-width: 1024px) { .step h3 { font-size: 1.15rem; } .step p { font-size: 1rem; } }
 
   .cases { display: grid; grid-template-columns: 1fr; gap: 14px; margin-top: clamp(24px, 3.5vw, 44px); }
-  @media (min-width: 640px) { .cases { grid-template-columns: repeat(2, 1fr); gap: 16px; grid-auto-flow: dense; } .tile.tile-featured { grid-column: span 2; } }
-  @media (min-width: 1024px) { .cases { grid-template-columns: repeat(3, 1fr); gap: 18px; grid-auto-flow: dense; } .tile.tile-featured { grid-column: span 2; } }
+  @media (min-width: 640px) { .cases { grid-template-columns: repeat(2, 1fr); gap: 16px; } }
+  @media (min-width: 1024px) { .cases { grid-template-columns: repeat(3, 1fr); gap: 18px; } }
   .case-type { color: var(--accent); font-size: .95rem; font-weight: 500; margin-bottom: 6px; }
   .case-title { font-family: var(--font-display); font-size: clamp(1.45rem, 2.2vw, 1.9rem); font-weight: 600; line-height: 1.12; letter-spacing: -.015em; }
   .case-desc { color: var(--muted); font-size: 1rem; }
@@ -692,7 +692,7 @@ const projects = [
           desc: "Rosalía's LUX album traces a journey from the earthly to the celestial, through faith and transformation. I used light as the series' core tool.<br><br>Every frame is fully AI-generated. This is my own interpretation, a thank-you for music that asks to be seen." }
   },
   {
-    id: "le-smoking", featured: true,
+    id: "le-smoking",
     category: "storytelling", badge: "personal", media: "", video: "le-smoking", cover: "le-smoking-cover", ratio: "4 / 3", tone: "rgba(200,200,200,.22)",
     tools: ["Midjourney", "Nano Banana", "GPT Image", "Seedance 2.5", "Kling"],
     ru: { title: "Le Smoking", format: "Историческая короткометражка, 1 минута",
@@ -701,7 +701,7 @@ const projects = [
           desc: "New York, the late sixties. Nan Kempner is turned away from La Côte Basque for wearing Yves Saint Laurent's tuxedo trousers, so she returns in the jacket alone, worn as a mini dress. A cinematic brand story where the character of Le Smoking is clear within a minute." }
   },
   {
-    id: "agmes", featured: true,
+    id: "agmes",
     category: "brand", badge: "spec", media: "",
     series: [{ id: "agmes-heart", name: "Heart" }, { id: "agmes-bracelets", name: "Bracelets" }, { id: "agmes-earrings", name: "Earrings" }], tone: "rgba(217,196,163,.32)",
     tools: ["Midjourney", "Nano Banana", "GPT Image", "Seedance 2.0", "Kling"],
@@ -738,7 +738,7 @@ const projects = [
           desc: "My experiment with the format. Behind the scenes of a shoot that never happened, with subway escalators, lighting, camera and the final look in red lace and Miu Miu glasses. The film crew was generated too." }
   },
   {
-    id: "mushrooms", featured: true,
+    id: "mushrooms",
     category: "creative", badge: "personal", media: "", video: "mushrooms", tone: "rgba(150,150,140,.28)",
     tools: ["Midjourney", "Nano Banana", "Kling"],
     ru: { title: "Mushrooms", format: "Арт-ролик о природе и украшениях, 36 секунд",
@@ -789,7 +789,7 @@ function renderCases() {
     const t = p[lang] || p.en;
     const cat = (categories[p.category] || {})[lang] || "";
     return `
-      <button class="tile${p.featured ? " tile-featured" : ""}" type="button" data-id="${p.id}" data-category="${p.category}" aria-label="${t.title}">
+      <button class="tile" type="button" data-id="${p.id}" data-category="${p.category}" aria-label="${t.title}">
         ${tileCoverMarkup(p)}
         <div class="tile-top"><span class="tile-cat">${cat}</span><span class="tile-icon">${arrowIcon("next")}</span></div>
       </button>`;
