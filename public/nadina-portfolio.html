@@ -199,40 +199,17 @@
   }
   .tile:hover, .tile:focus-visible { transform: translateY(-3px); }
   .tile-media { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
-  .tile-scrim { position: absolute; inset: 0; background: linear-gradient(180deg, transparent 50%, rgba(0,0,0,.72) 100%); }
-  .tile-top { position: absolute; left: 16px; top: 14px; display: flex; gap: 6px; align-items: center; }
+  .tile-media.tile-hover { opacity: 0; transition: opacity .3s var(--ease); }
+  .tile:hover .tile-hover, .tile:focus-visible .tile-hover { opacity: 1; }
+  .tile-top { position: absolute; left: 16px; right: 16px; top: 14px; display: flex; justify-content: space-between; align-items: center; gap: 6px; z-index: 1; }
   .tile-cat { font-size: .72rem; font-weight: 600; letter-spacing: .03em; color: rgba(255,255,255,.85); background: rgba(255,255,255,.14); backdrop-filter: blur(10px); padding: 4px 10px; border-radius: 999px; }
-  .tile-bottom { position: absolute; left: 16px; right: 16px; bottom: 14px; display: flex; align-items: flex-end; justify-content: space-between; gap: 10px; color: #fff; }
-  .tile-title { font-size: clamp(1.05rem, 1.6vw, 1.25rem); font-weight: 500; letter-spacing: -.015em; text-align: left; }
-  .tile-icon { width: 36px; height: 36px; border-radius: 50%; display: grid; place-items: center; flex: none;
+  .tile-icon { width: 36px; height: 36px; border-radius: 50%; display: grid; place-items: center; flex: none; color: #fff;
     background: rgba(255,255,255,.18); backdrop-filter: blur(12px);
     opacity: 0; transform: scale(.8); transition: opacity .3s var(--ease), transform .3s var(--glide); }
   .tile-icon svg { width: 15px; height: 15px; }
   .tile:hover .tile-icon, .tile:focus-visible .tile-icon { opacity: 1; transform: none; }
   @media (hover: none) { .tile-icon { opacity: 1; transform: none; } }
 
-  /* ===== НАПРАВЛЕНИЯ: витрина из двух плашек ===== */
-  #directions { padding-top: 0; }
-  .dir-grid { display: grid; grid-template-columns: 1fr; gap: 16px; }
-  @media (min-width: 761px) { .dir-grid { grid-template-columns: repeat(2, 1fr); gap: 20px; } }
-  .dir-tile {
-    position: relative; display: block; overflow: hidden; border-radius: var(--radius-lg);
-    aspect-ratio: 16 / 10; background: var(--frame);
-    box-shadow: 0 30px 60px -36px rgba(0,0,0,.35);
-    transition: transform .5s var(--ease);
-  }
-  .dir-tile:hover { transform: translateY(-3px); }
-  @media (min-width: 761px) { .dir-tile { aspect-ratio: 4 / 3.1; } }
-  .dir-media { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
-  .dir-scrim { position: absolute; inset: 0; background: linear-gradient(180deg, transparent 45%, rgba(0,0,0,.65) 100%); }
-  .dir-scrim.static { background: linear-gradient(160deg, #3a3a3e, #17171a); }
-  .dir-tile.soon { cursor: default; }
-  .dir-label { position: absolute; left: 24px; right: 24px; bottom: 22px; display: flex; align-items: center; justify-content: space-between; color: #fff; }
-  .dir-title { font-size: clamp(1.2rem, 2.4vw, 1.7rem); font-weight: 500; letter-spacing: -.02em; }
-  .dir-arrow { width: 40px; height: 40px; border-radius: 50%; display: grid; place-items: center; background: rgba(255,255,255,.16); backdrop-filter: blur(14px); opacity: 0; transform: translate(-6px, 6px) scale(.85); transition: opacity .35s var(--ease), transform .35s var(--glide); }
-  .dir-arrow svg { width: 16px; height: 16px; }
-  .dir-tile:hover .dir-arrow, .dir-tile:focus-visible .dir-arrow { opacity: 1; transform: none; }
-  .dir-soon { font-size: .75rem; font-weight: 600; letter-spacing: .03em; padding: 5px 12px; border-radius: 999px; background: rgba(255,255,255,.14); color: rgba(255,255,255,.85); }
 
   /* ===== ОКНО ПРОЕКТА ===== */
   .pm { position: fixed; inset: 0; z-index: 85; display: flex; justify-content: center;
@@ -391,21 +368,6 @@
   }
   @media (prefers-reduced-motion: reduce) { .sheet, .sheet-bg, .sheet-wrap { transition: none; } }
 
-  /* видео в работах */
-  .play-btn {
-    position: absolute; left: 20px; bottom: 20px; z-index: 2;
-    display: inline-flex; align-items: center; gap: 10px;
-    padding: 10px 18px 10px 12px; border: 0; border-radius: 999px; cursor: pointer;
-    font: inherit; font-size: .9rem; font-weight: 500; color: #fff;
-    background: rgba(255,255,255,.16); backdrop-filter: blur(16px) saturate(160%); -webkit-backdrop-filter: blur(16px) saturate(160%);
-    box-shadow: inset 0 0 0 1px rgba(255,255,255,.22);
-    transition: background .3s, transform .35s var(--ease);
-  }
-  .play-btn:hover { background: rgba(255,255,255,.28); transform: translateY(-2px); }
-  .play-btn:active { transform: scale(.97); }
-  .play-btn i { width: 30px; height: 30px; border-radius: 50%; background: #fff; display: grid; place-items: center; }
-  .play-btn i::before { content: ""; margin-left: 3px; border-style: solid; border-width: 6px 0 6px 10px; border-color: transparent transparent transparent #111; }
-
   /* вертикальная работа: кадр слева, подпись справа */
   .case.vertical { display: grid; grid-template-columns: minmax(0, 420px) minmax(0, 1fr); gap: 20px 56px; align-items: end; }
   .case.vertical .case-meta { grid-template-columns: 1fr; margin-top: 0; }
@@ -417,8 +379,6 @@
   .triptych-wrap { position: relative; }
   .triptych { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; }
   .case .triptych .frame { aspect-ratio: 9 / 16; }
-  .triptych .play-btn { left: 14px; bottom: 14px; padding: 8px 14px 8px 8px; font-size: .85rem; }
-  .triptych .play-btn i { width: 26px; height: 26px; }
   @media (max-width: 760px) {
     .triptych { display: flex; gap: 10px; overflow-x: auto; scroll-snap-type: x mandatory; margin-inline: -20px; padding-inline: 20px; scrollbar-width: none; }
     .triptych::-webkit-scrollbar { display: none; }
@@ -531,7 +491,6 @@
     .case-desc { font-size: 1.16rem; line-height: 1.6; }
     .tools-label { font-size: .92rem; }
     .tools li { font-size: .95rem; padding: 7px 15px; }
-    .play-btn { font-size: 1rem; }
     .citem { font-size: 1.25rem; }
     .citem .ico { width: 22px; height: 22px; }
   }
@@ -575,29 +534,6 @@
   </section>
 
   <div class="wrap"><div class="hero-rule"></div></div>
-
-  <!-- ===== НАПРАВЛЕНИЯ ===== -->
-  <section id="directions">
-    <div class="wrap">
-      <div class="dir-grid">
-        <a class="dir-tile" href="#work" data-reveal>
-          <video class="dir-media" muted loop playsinline preload="none" data-vid="le-smoking-cover"></video>
-          <div class="dir-scrim"></div>
-          <div class="dir-label">
-            <span class="dir-title" data-i18n="dir.ai">AI Projects</span>
-            <span class="dir-arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M8 7h9v9"/></svg></span>
-          </div>
-        </a>
-        <a class="dir-tile soon" href="#interiors" data-reveal style="--d:.1s">
-          <div class="dir-scrim static"></div>
-          <div class="dir-label">
-            <span class="dir-title" data-i18n="dir.interiors">Interiors</span>
-            <span class="dir-soon" data-i18n="int.soon">Soon</span>
-          </div>
-        </a>
-      </div>
-    </div>
-  </section>
 
   <!-- ===== ОБО МНЕ ===== -->
   <section id="about">
@@ -701,12 +637,6 @@
     </div>
     <div class="pm-body" id="pmBody"></div>
   </div>
-</div>
-
-<!-- Просмотр со звуком -->
-<div class="lb" id="lightbox" role="dialog" aria-modal="true" aria-hidden="true">
-  <button class="lb-close" type="button" id="lbClose" aria-label="Close">×</button>
-  <video id="lbVideo" controls playsinline></video>
 </div>
 
 <!-- Выбор почтового сервиса -->
@@ -831,12 +761,9 @@ const arrowIcon = (dir) => `<svg viewBox="0 0 24 24" fill="none" stroke="current
 
 function tileCoverMarkup(p) {
   if (p.photos) return `<img class="tile-media" src="media/work/${p.photos[0]}" alt="" loading="lazy">`;
-  if (p.series) return `<video class="tile-media" data-vid="${p.series[0].id}" muted loop playsinline preload="none"></video>`;
-  if (p.video) {
-    return p.coverImg
-      ? `<img class="tile-media" src="media/work/${p.coverImg}.jpg" alt="" loading="lazy">`
-      : `<video class="tile-media" data-vid="${p.cover || p.video}" muted loop playsinline preload="none"></video>`;
-  }
+  if (p.coverImg) return `<img class="tile-media" src="media/work/${p.coverImg}.jpg" alt="" loading="lazy"><video class="tile-media tile-hover" data-vid="${p.video}" muted loop playsinline preload="none"></video>`;
+  const base = p.series ? p.series[0].id : (p.cover || p.video);
+  if (base) return `<img class="tile-media" src="media/work/${base}-poster.jpg" alt="" loading="lazy"><video class="tile-media tile-hover" data-vid="${base}" muted loop playsinline preload="none"></video>`;
   return `<div class="tile-media ph" style="position:absolute;inset:0;--tone:${p.tone}"></div>`;
 }
 function renderCases() {
@@ -846,33 +773,30 @@ function renderCases() {
     return `
       <button class="tile" type="button" data-id="${p.id}" data-category="${p.category}" aria-label="${t.title}">
         ${tileCoverMarkup(p)}
-        <div class="tile-scrim"></div>
-        <div class="tile-top"><span class="tile-cat">${cat}</span></div>
-        <div class="tile-bottom">
-          <span class="tile-title">${t.title}</span>
-          <span class="tile-icon">${arrowIcon("next")}</span>
-        </div>
+        <div class="tile-top"><span class="tile-cat">${cat}</span><span class="tile-icon">${arrowIcon("next")}</span></div>
       </button>`;
   }).join("");
-  casesEl.querySelectorAll(".tile-media[data-vid]").forEach(v => { setVideo(v, v.dataset.vid, false); watchVideo(v); });
-  casesEl.querySelectorAll(".tile").forEach(b => b.addEventListener("click", () => openProjectModal(b.dataset.id)));
+  casesEl.querySelectorAll(".tile").forEach(tile => {
+    const v = tile.querySelector(".tile-hover");
+    if (v) {
+      setVideo(v, v.dataset.vid, false);
+      tile.addEventListener("mouseenter", () => v.play().catch(() => {}));
+      tile.addEventListener("mouseleave", () => { v.pause(); v.currentTime = 0; });
+    }
+    tile.addEventListener("click", () => openProjectModal(tile.dataset.id));
+  });
   applyFilter();
   armReveal(casesEl.querySelectorAll("[data-reveal]"));
 }
 
 function buildMediaMarkup(p, t) {
-  const seriesIds = p.series ? p.series.map(x => x.id) : null;
-  const coverImg = p.coverImg ? "media/work/" + p.coverImg + ".jpg" : "";
   if (p.series) {
-    return `<div class="triptych-wrap"><div class="triptych">${p.series.map(x => `<div class="frame iris"><video class="case-video" data-vid="${x.id}" muted loop playsinline preload="none"></video><button class="play-btn" type="button" data-vid="${x.id}" data-series="${seriesIds.join(",")}" aria-label="${dict[lang]["case.watch"]}: ${x.name}"><i></i>${x.name}</button></div>`).join("")}</div><button class="tri-arrow tri-prev" type="button" aria-label="Previous">${arrowIcon("prev")}</button><button class="tri-arrow tri-next" type="button" aria-label="Next">${arrowIcon("next")}</button></div>`;
+    return `<div class="triptych-wrap"><div class="triptych">${p.series.map((x, i) => `<div class="frame"><video data-vid="${x.id}" controls playsinline preload="metadata"${i === 0 ? " autoplay" : ""}></video></div>`).join("")}</div><button class="tri-arrow tri-prev" type="button" aria-label="Previous">${arrowIcon("prev")}</button><button class="tri-arrow tri-next" type="button" aria-label="Next">${arrowIcon("next")}</button></div>`;
   }
   if (p.photos) {
-    return `<div class="frame iris photo-gallery"${p.ratio ? ` style="aspect-ratio:${p.ratio}"` : ""}><div class="pg-track">${p.photos.map((f, i) => `<div class="pg-slide"><img src="media/work/${f}" alt="${t.title} ${i + 1}" loading="${i === 0 ? "eager" : "lazy"}"></div>`).join("")}</div><button class="tri-arrow tri-prev" type="button" aria-label="Previous">${arrowIcon("prev")}</button><button class="tri-arrow tri-next" type="button" aria-label="Next">${arrowIcon("next")}</button><span class="pg-counter">1 / ${p.photos.length}</span></div>`;
+    return `<div class="frame photo-gallery"${p.ratio ? ` style="aspect-ratio:${p.ratio}"` : ""}><div class="pg-track">${p.photos.map((f, i) => `<div class="pg-slide"><img src="media/work/${f}" alt="${t.title} ${i + 1}" loading="${i === 0 ? "eager" : "lazy"}"></div>`).join("")}</div><button class="tri-arrow tri-prev" type="button" aria-label="Previous">${arrowIcon("prev")}</button><button class="tri-arrow tri-next" type="button" aria-label="Next">${arrowIcon("next")}</button><span class="pg-counter">1 / ${p.photos.length}</span></div>`;
   }
-  const media = p.video
-    ? `${coverImg ? `<img src="${coverImg}" alt="${t.title}" loading="lazy">` : `<video class="case-video" data-vid="${p.cover || p.video}" muted loop playsinline preload="none"></video>`}<button class="play-btn" type="button" data-vid="${p.video}"><i></i>${dict[lang]["case.watch"]}</button>`
-    : `<div class="ph" style="position:absolute;inset:0;--tone:${p.tone}"><strong>${dict[lang]["case.ph"]}</strong><small>${dict[lang]["case.hint"]}</small></div>`;
-  return `<div class="frame iris"${p.ratio ? ` style="aspect-ratio:${p.ratio}"` : ""}>${media}</div>`;
+  return `<div class="frame"${p.ratio ? ` style="aspect-ratio:${p.ratio}"` : ""}><video data-vid="${p.video}" controls playsinline autoplay></video></div>`;
 }
 
 /* ===== Окно проекта ===== */
@@ -896,10 +820,8 @@ function renderModalContent(p) {
       <p class="case-desc" style="margin-top:14px">${t.desc}</p>
       ${tools}
     </div>`;
-  pmBody.querySelectorAll(".case-video").forEach(v => { setVideo(v, v.dataset.vid, false); watchVideo(v); });
-  pmBody.querySelectorAll(".play-btn").forEach(b => b.addEventListener("click", () => openLightbox(b.dataset.vid, b.dataset.series ? b.dataset.series.split(",") : null)));
+  pmBody.querySelectorAll("video[data-vid]").forEach(v => { setVideo(v, v.dataset.vid, v.hasAttribute("autoplay")); });
   wireTriptychArrows(pmBody);
-  armReveal(pmBody.querySelectorAll(".iris"));
 }
 function openProjectModal(id, skipHash) {
   const p = projects.find(x => x.id === id);
@@ -982,39 +904,6 @@ function applyFilter() {
     el.style.display = (activeCategory === "all" || el.dataset.category === activeCategory) ? "" : "none";
   });
 }
-/* превью играет, только когда видно на экране */
-const vidIO = "IntersectionObserver" in window ? new IntersectionObserver(es => es.forEach(e => {
-  if (e.isIntersecting) e.target.play().catch(() => {}); else e.target.pause();
-}), { threshold: 0.25 }) : null;
-function watchVideo(v) { if (vidIO) vidIO.observe(v); else v.play().catch(() => {}); }
-document.querySelectorAll(".dir-media[data-vid]").forEach(v => { setVideo(v, v.dataset.vid, false); watchVideo(v); });
-
-/* ===== Просмотр со звуком ===== */
-const lb = document.getElementById("lightbox"), lbVideo = document.getElementById("lbVideo");
-let lbList = null;
-lbVideo.addEventListener("ended", () => {
-  if (!lbList) return;
-  const next = lbList[lbList.indexOf(lbVideo.dataset.vid) + 1];
-  if (next) playInLightbox(next);
-});
-function playInLightbox(id) {
-  lbVideo.dataset.vid = id;
-  setVideo(lbVideo, id, false);
-  lbVideo.muted = false; lbVideo.currentTime = 0;
-  lbVideo.play().catch(() => {});
-}
-function openLightbox(id, list) {
-  lbList = list || null;
-  lb.classList.add("open"); lb.setAttribute("aria-hidden", "false");
-  playInLightbox(id);
-  document.getElementById("lbClose").focus({ preventScroll: true });
-}
-function closeLightbox() {
-  lbVideo.pause(); lb.classList.remove("open"); lb.setAttribute("aria-hidden", "true");
-}
-document.getElementById("lbClose").addEventListener("click", closeLightbox);
-lb.addEventListener("click", e => { if (e.target === lb) closeLightbox(); });
-document.addEventListener("keydown", e => { if (e.key === "Escape" && lb.classList.contains("open")) closeLightbox(); });
 const tkEl = document.getElementById("toolkit");
 function renderToolkit() {
   tkEl.innerHTML = toolkit.map((name, i) => `<span class="tk-item" data-reveal style="--d:${(i * 0.06).toFixed(2)}s">${name}</span>`).join("");
@@ -1025,7 +914,6 @@ function renderToolkit() {
 const dict = {
   ru: {
     "tab.home": "Главная", "nav.about": "Обо мне", "nav.work": "AI-проекты", "nav.contact": "Контакты", "name.first": "Надина", "name.last": "Ширина", "name.full": "Надина Ширина", "nav.interiors": "Интерьеры", "int.title": "Интерьеры", "int.soon": "Скоро", "int.sub": "AI-визуализация и хоумстейджинг для интерьеров, в которых хочется жить.",
-    "dir.ai": "AI-проекты", "dir.interiors": "Интерьеры",
     "share.copied": "Ссылка скопирована", "share.copyLink": "Скопировать ссылку",
     "hero.kicker": "InMorpho Studio",
     "hero.tagline": "Снимаю без камеры и людей так, что невозможно не почувствовать.",
@@ -1060,7 +948,6 @@ const dict = {
   },
   en: {
     "tab.home": "Home", "nav.about": "About", "nav.work": "AI Projects", "nav.contact": "Contact", "name.first": "Nadina", "name.last": "Shirina", "name.full": "Nadina Shirina", "nav.interiors": "Interiors", "int.title": "Interiors", "int.soon": "Coming soon", "int.sub": "AI visualisation and home staging for interiors you want to live in.",
-    "dir.ai": "AI Projects", "dir.interiors": "Interiors",
     "share.copied": "Link copied", "share.copyLink": "Copy link",
     "hero.kicker": "InMorpho Studio",
     "hero.tagline": "No camera. No cast. Videos you can't help but feel.",
