@@ -186,27 +186,26 @@
   }
 
   /* ===== КАК Я РАБОТАЮ ===== */
-  .steps { display: flex; align-items: stretch; gap: 0; margin-top: clamp(24px, 3.5vw, 44px); flex-wrap: wrap; }
-  .step { flex: 1 1 160px; background: var(--paper); border-radius: var(--radius-md); padding: 22px 20px; box-shadow: 0 16px 36px -26px rgba(0,0,0,.3); }
+  .steps { display: flex; flex-wrap: nowrap; align-items: stretch; gap: 0; margin-top: clamp(24px, 3.5vw, 44px); }
+  .step { flex: 1 1 0; min-width: 0; background: var(--paper); border-radius: var(--radius-md); padding: clamp(12px, 1.8vw, 22px) clamp(10px, 1.6vw, 20px); box-shadow: 0 16px 36px -26px rgba(0,0,0,.3); }
   .step-link { position: relative; display: block; text-decoration: none; color: inherit; cursor: pointer; transition: transform .3s var(--ease), box-shadow .3s var(--ease); }
   .step-link:hover, .step-link:focus-visible { transform: translateY(-3px); box-shadow: 0 20px 44px -26px rgba(0,0,0,.4); }
   .step-link .step-arr { position: absolute; top: 18px; right: 18px; width: 16px; height: 16px; color: var(--muted); opacity: .5; transition: opacity .25s, transform .25s var(--glide); }
   .step-link:hover .step-arr, .step-link:focus-visible .step-arr { opacity: 1; transform: translate(2px, -2px); }
-  .step-num { display: block; font-size: 1.3rem; font-weight: 600; color: var(--accent); margin-bottom: 10px; }
-  .step h3 { font-size: 1.05rem; font-weight: 600; letter-spacing: -.01em; margin-bottom: 6px; }
-  .step p { color: var(--muted); font-size: .92rem; }
-  .step-arrow { flex: 0 0 28px; display: flex; align-items: center; justify-content: center; color: var(--muted); opacity: .55; }
-  .step-arrow svg { width: 18px; height: 18px; }
-  @media (max-width: 820px) {
+  .step-num { display: block; font-size: clamp(.8rem, 1.3vw, 1.3rem); font-weight: 600; color: var(--accent); margin-bottom: clamp(4px, 1vw, 10px); }
+  .step h3 { font-size: clamp(.78rem, 1.1vw, 1.05rem); font-weight: 600; letter-spacing: -.01em; margin-bottom: clamp(2px, .6vw, 6px); text-wrap: balance; }
+  .step p { color: var(--muted); font-size: clamp(.7rem, .95vw, .92rem); line-height: 1.35; }
+  .step-arrow { flex: 0 0 clamp(10px, 1.8vw, 28px); display: flex; align-items: center; justify-content: center; color: var(--muted); opacity: .55; }
+  .step-arrow svg { width: clamp(10px, 1.2vw, 18px); height: clamp(10px, 1.2vw, 18px); }
+  @media (max-width: 600px) {
     .steps { flex-direction: column; gap: 6px; margin-top: 16px; }
     .step { flex: 0 0 auto; display: flex; align-items: baseline; flex-wrap: wrap; column-gap: 10px; padding: 11px 16px; }
     .step-num { font-size: .85rem; margin-bottom: 0; flex: none; }
     .step h3 { font-size: .92rem; margin-bottom: 0; flex: none; }
     .step p { flex-basis: 100%; font-size: .82rem; margin-top: 2px; }
-    .step-arrow { flex-basis: 16px; height: 16px; opacity: .4; transform: rotate(90deg); }
+    .step-arrow { flex-basis: 16px; width: auto; height: 16px; opacity: .4; transform: rotate(90deg); }
     .step-arrow svg { width: 13px; height: 13px; }
   }
-  @media (min-width: 1024px) { .step h3 { font-size: 1.15rem; } .step p { font-size: 1rem; } }
 
   .cases { display: grid; grid-template-columns: 1fr; gap: 14px; margin-top: clamp(24px, 3.5vw, 44px); }
   @media (min-width: 640px) { .cases { grid-template-columns: repeat(2, 1fr); gap: 16px; } }
