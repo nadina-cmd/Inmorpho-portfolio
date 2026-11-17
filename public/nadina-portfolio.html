@@ -124,7 +124,6 @@
   .hero { position: relative; display: flex; flex-direction: column; padding: 110px 0 clamp(28px, 4vw, 48px); isolation: isolate; }
   .hero-rule { height: 1px; background: var(--line); }
   #about {
-    min-height: 100svh; display: flex; flex-direction: column; justify-content: center;
     padding-top: clamp(24px, 4vh, 56px); padding-bottom: clamp(24px, 4vh, 56px);
   }
   .spot {
@@ -988,7 +987,7 @@ const dict = {
     "case3.type": "Короткометражка", "case3.title": "Название проекта",
     "case4.type": "Бренд-фильм", "case4.title": "Название проекта",
     "case5.type": "AI-хоумстейджинг", "case5.title": "Название проекта",
-    "contact.title": "У каждого бренда своя история. Создадим вашу.",
+    "contact.title": "У каждого бренда своя история.\nСоздадим вашу.",
     "contact.sub": "Расскажите о бренде и задаче, а я предложу идею и формат.",
     "contact.write": "Написать мне", "contact.copy": "Копировать", "contact.copied": "Адрес скопирован", "sheet.title": "Написать на почту", "sheet.app": "Почтовое приложение", "sheet.copy": "Скопировать адрес", "sheet.cancel": "Отмена", "contact.mailHint": "Адрес скопирован. Если почта не открылась, вставьте его в новое письмо.",
     "contact.upworkVal": "Nadina S."
@@ -1031,7 +1030,7 @@ const dict = {
     "case3.type": "Short film", "case3.title": "Project title",
     "case4.type": "Brand film", "case4.title": "Project title",
     "case5.type": "AI home staging", "case5.title": "Project title",
-    "contact.title": "Every brand has its own story. Let's create yours.",
+    "contact.title": "Every brand has its own story.\nLet's create yours.",
     "contact.sub": "Tell me about your brand and the task. I'll come back with an idea and a format.",
     "contact.write": "Write to me", "contact.copy": "Copy", "contact.copied": "Address copied", "sheet.title": "Write an email", "sheet.app": "Mail app", "sheet.copy": "Copy address", "sheet.cancel": "Cancel", "contact.mailHint": "Address copied. If your mail app didn't open, paste it into a new email.",
     "contact.upworkVal": "Nadina S."
@@ -1043,19 +1042,25 @@ const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
 /* ===== Разбивка текста на слова для анимаций ===== */
 function splitWords(el, text) {
   el.textContent = "";
-  text.split(/\s+/).forEach((word, i) => {
-    const w = document.createElement("span");
-    w.className = "w";
-    if (el.dataset.split === "rise") {
-      const inner = document.createElement("span");
-      inner.textContent = word;
-      inner.style.setProperty("--i", i);
-      w.appendChild(inner);
-    } else {
-      w.textContent = word;
-    }
-    el.appendChild(w);
-    el.appendChild(document.createTextNode(" "));
+  let i = 0;
+  const lines = text.split("\n");
+  lines.forEach((line, li) => {
+    line.split(/\s+/).forEach(word => {
+      const w = document.createElement("span");
+      w.className = "w";
+      if (el.dataset.split === "rise") {
+        const inner = document.createElement("span");
+        inner.textContent = word;
+        inner.style.setProperty("--i", i);
+        w.appendChild(inner);
+      } else {
+        w.textContent = word;
+      }
+      el.appendChild(w);
+      el.appendChild(document.createTextNode(" "));
+      i++;
+    });
+    if (li < lines.length - 1) el.appendChild(document.createElement("br"));
   });
 }
 
@@ -1119,6 +1124,7 @@ function spy() {
   const probe = nav.offsetHeight + window.innerHeight * 0.3;
   let current = "top";
   sections.forEach(s => { if (s.getBoundingClientRect().top <= probe) current = s.id; });
+  if (window.scrollY <= 4) current = "top";
   if (window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 4) current = "contact";
   setActive(current);
 }
