@@ -319,11 +319,11 @@
   .pm-menu button:hover { background: rgba(255,255,255,.1); }
 
   .contact { text-align: center; }
-  .contact .h2 { max-width: none; margin-inline: auto; text-wrap: balance;
+  .contact .h2 { max-width: none; margin-inline: auto; text-wrap: balance; color: #fff;
     font-family: "Great Vibes", "Marck Script", "Snell Roundhand", "Apple Chancery", cursive;
     font-weight: 400; font-size: clamp(2.3rem, 5vw, 4.4rem); line-height: 1.15; letter-spacing: 0; }
   .contact .h2 .w { padding: .12em .12em .28em; margin: -.12em -.12em -.28em; }
-  .cline { display: flex; flex-direction: column; align-items: center; gap: 10px; margin-top: clamp(20px, 3vw, 32px); }
+  .cline { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; column-gap: 36px; row-gap: 10px; margin-top: clamp(20px, 3vw, 32px); }
   .sub-arrow { display: inline-flex; align-items: center; justify-content: center; min-width: 40px; min-height: 40px; margin: -11px -11px -11px -4px; padding: 0; vertical-align: middle; cursor: pointer; transition: transform .35s var(--glide); }
   .sub-arrow .ico-img { width: 18px; height: 18px; border-radius: 4px; opacity: .85; transition: opacity .3s; }
   .sub-arrow:hover, .sub-arrow:focus-visible { transform: translateY(3px); }
@@ -338,7 +338,7 @@
   .citem:hover span { background-size: 100% 1px; }
   .citem:hover .arr { transform: translate(2px, -2px); opacity: 1; }
   .citem:hover .ico { color: var(--text); }
-  .contact .sub { margin-inline: auto; }
+  .contact .sub { margin-inline: auto; color: var(--text); }
   /* контакты: редакционный список, как у дизайн-агентств */
   .clist { list-style: none; padding: 0; max-width: 980px; margin: clamp(28px, 4vw, 48px) auto 0; text-align: left; border-top: 1px solid var(--line); }
   .crow { position: relative; border-bottom: 1px solid var(--line); }
