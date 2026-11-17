@@ -38,7 +38,7 @@
   html { scroll-behavior: smooth; scroll-padding-top: calc(env(safe-area-inset-top, 0px) + 80px); }
   *, *::before, *::after { box-sizing: inherit; margin: 0; }
   body {
-    background: linear-gradient(180deg, #f2f3f6 0%, var(--bg) 45%, #cfd3db 100%);
+    background: linear-gradient(180deg, #e9eaf0 0%, var(--bg) 35%, #a7abc4 72%, #7d83a6 100%);
     color: var(--text);
     font: 100%/1.55 -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display", "Helvetica Neue", "Segoe UI", Roboto, Arial, sans-serif;
     -webkit-font-smoothing: antialiased;
@@ -138,6 +138,10 @@
   .color-spot { position: absolute; z-index: -1; pointer-events: none; border-radius: 50%; filter: blur(80px); }
   .hero .color-spot { width: 380px; height: 380px; top: -110px; right: -60px; background: var(--spot-accent); opacity: .22; }
   #about .color-spot { width: 300px; height: 300px; left: -70px; bottom: -40px; background: var(--spot-silver); opacity: .35; }
+  .color-spot.spot-dark { background: var(--frame); }
+  .hero .color-spot.spot-dark { width: 340px; height: 340px; top: auto; right: auto; bottom: -80px; left: -60px; opacity: .3; }
+  #work .color-spot { width: 360px; height: 360px; top: -60px; right: -80px; background: var(--frame); opacity: .25; }
+  #contact .color-spot { width: 380px; height: 380px; bottom: -120px; left: 50%; transform: translateX(-50%); background: var(--frame); opacity: .3; }
   .kicker { color: var(--muted); font-size: clamp(.95rem, 1.1vw, 1.05rem); margin-bottom: 16px; letter-spacing: .01em; }
   .name {
     font-family: var(--font-display);
@@ -318,7 +322,8 @@
   .pm-menu button { width: 100%; text-align: left; font: inherit; font-size: .9rem; padding: 10px 12px; border-radius: 9px; border: 0; background: none; cursor: pointer; color: #fff; }
   .pm-menu button:hover { background: rgba(255,255,255,.1); }
 
-  .contact { text-align: center; }
+  .contact { position: relative; isolation: isolate; text-align: center; }
+  #work { position: relative; isolation: isolate; }
   .contact .h2 { max-width: none; margin-inline: auto; text-wrap: balance;
     font-family: "Great Vibes", "Marck Script", "Snell Roundhand", "Apple Chancery", cursive;
     font-weight: 400; font-size: clamp(2.3rem, 5vw, 4.4rem); line-height: 1.15; letter-spacing: 0; }
@@ -541,6 +546,7 @@
   <section id="top" class="hero">
     <div class="spot" aria-hidden="true"></div>
     <div class="color-spot" aria-hidden="true"></div>
+    <div class="color-spot spot-dark" aria-hidden="true"></div>
     <div class="wrap">
       <p class="kicker" data-i18n="hero.kicker">InMorpho Studio</p>
       <h1 class="name"><span data-i18n="name.first">Nadina</span> <span data-i18n="name.last">Shirina</span></h1>
@@ -555,6 +561,7 @@
        <video src="..." autoplay muted loop playsinline></video>
        Тексты проектов правятся в словаре внизу файла (ключи case1..case5). -->
   <section id="work">
+    <div class="color-spot" aria-hidden="true"></div>
     <div class="wrap">
       <h2 class="h2" data-split="rise" data-i18n="work.title">Stories</h2>
       <div class="cat-filters" id="catFilters" data-reveal role="group" aria-label="Filter by category"></div>
@@ -619,6 +626,7 @@
 
   <!-- ===== КОНТАКТЫ ===== -->
   <section id="contact" class="contact">
+    <div class="color-spot" aria-hidden="true"></div>
     <div class="wrap">
       <h2 class="h2" data-split="rise" data-i18n="contact.title">Every brand has its own story. Let's create yours.</h2>
       <p class="sub" data-reveal><span data-i18n="contact.sub"></span> <a class="sub-arrow" href="#" id="briefLink" target="_blank" rel="noopener" aria-label="Send the brief"><svg class="ico ico-img" viewBox="0 0 24 24" aria-hidden="true"><rect width="24" height="24" rx="5.3" fill="#000"/><g transform="translate(12 12) scale(.62) translate(-12 -12)" fill="none" stroke="#fff" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="3" width="14" height="18" rx="2.2"/><circle cx="8.3" cy="8.6" r=".9"/><path d="M11.3 8.6h5.2"/><circle cx="8.3" cy="12.6" r=".9"/><path d="M11.3 12.6h5.2"/><circle cx="8.3" cy="16.6" r=".9"/><path d="M11.3 16.6h3.4"/></g></svg></a></p>
