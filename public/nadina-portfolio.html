@@ -38,7 +38,7 @@
   html { scroll-behavior: smooth; scroll-padding-top: calc(env(safe-area-inset-top, 0px) + 80px); }
   *, *::before, *::after { box-sizing: inherit; margin: 0; }
   body {
-    background: linear-gradient(180deg, #e9eaf0 0%, var(--bg) 35%, #a7abc4 72%, #7d83a6 100%);
+    background: linear-gradient(180deg, #e9eaea 0%, var(--bg) 35%, #a8a9ac 72%, #76777b 100%);
     color: var(--text);
     font: 100%/1.55 -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display", "Helvetica Neue", "Segoe UI", Roboto, Arial, sans-serif;
     -webkit-font-smoothing: antialiased;
@@ -124,7 +124,6 @@
   .hero { position: relative; display: flex; flex-direction: column; padding: 110px 0 clamp(28px, 4vw, 48px); isolation: isolate; }
   .hero-rule { height: 1px; background: var(--line); }
   #about {
-    position: relative; isolation: isolate;
     min-height: 100svh; display: flex; flex-direction: column; justify-content: center;
     padding-top: clamp(24px, 4vh, 56px); padding-bottom: clamp(24px, 4vh, 56px);
   }
@@ -135,13 +134,6 @@
     background: radial-gradient(22vmax 22vmax at var(--x, 50%) var(--y, 30%), rgba(255,255,255,.85), rgba(255,255,255,.3) 45%, transparent 72%);
   }
   .hero.lit .spot { opacity: 1; }
-  .color-spot { position: absolute; z-index: -1; pointer-events: none; border-radius: 50%; filter: blur(80px); }
-  .hero .color-spot { width: 380px; height: 380px; top: -110px; right: -60px; background: var(--spot-accent); opacity: .22; }
-  #about .color-spot { width: 300px; height: 300px; left: -70px; bottom: -40px; background: var(--spot-silver); opacity: .35; }
-  .color-spot.spot-dark { background: var(--frame); }
-  .hero .color-spot.spot-dark { width: 340px; height: 340px; top: auto; right: auto; bottom: -80px; left: -60px; opacity: .3; }
-  #work .color-spot { width: 360px; height: 360px; top: -60px; right: -80px; background: var(--frame); opacity: .25; }
-  #contact .color-spot { width: 380px; height: 380px; bottom: -120px; left: 50%; transform: translateX(-50%); background: var(--frame); opacity: .3; }
   .kicker { color: var(--muted); font-size: clamp(.95rem, 1.1vw, 1.05rem); margin-bottom: 16px; letter-spacing: .01em; }
   .name {
     font-family: var(--font-display);
@@ -186,7 +178,7 @@
   .facts { display: grid; gap: clamp(8px, 1.6vh, 22px); }
   .fact { padding-top: 10px; border-top: 1px solid var(--line); }
   .fact h3 { font-size: 1.02rem; font-weight: 600; letter-spacing: -.01em; margin-bottom: 4px; }
-  .fact p { color: var(--muted); text-wrap: pretty; font-size: clamp(.9rem, 1.5vh, 1rem); line-height: 1.4; }
+  .fact p { color: var(--text); text-wrap: pretty; font-size: clamp(.9rem, 1.5vh, 1rem); line-height: 1.4; }
   @media (max-width: 820px) {
     .about-grid { grid-template-columns: 1fr; }
     .portrait { width: 100%; height: auto; aspect-ratio: 16 / 9; max-height: 32vh; }
@@ -197,6 +189,10 @@
   /* ===== КАК Я РАБОТАЮ ===== */
   .steps { display: flex; align-items: stretch; gap: 0; margin-top: clamp(24px, 3.5vw, 44px); flex-wrap: wrap; }
   .step { flex: 1 1 160px; background: var(--paper); border-radius: var(--radius-md); padding: 22px 20px; box-shadow: 0 16px 36px -26px rgba(0,0,0,.3); }
+  .step-link { position: relative; display: block; text-decoration: none; color: inherit; cursor: pointer; transition: transform .3s var(--ease), box-shadow .3s var(--ease); }
+  .step-link:hover, .step-link:focus-visible { transform: translateY(-3px); box-shadow: 0 20px 44px -26px rgba(0,0,0,.4); }
+  .step-link .step-arr { position: absolute; top: 18px; right: 18px; width: 16px; height: 16px; color: var(--muted); opacity: .5; transition: opacity .25s, transform .25s var(--glide); }
+  .step-link:hover .step-arr, .step-link:focus-visible .step-arr { opacity: 1; transform: translate(2px, -2px); }
   .step-num { display: block; font-size: 1.3rem; font-weight: 600; color: var(--accent); margin-bottom: 10px; }
   .step h3 { font-size: 1.05rem; font-weight: 600; letter-spacing: -.01em; margin-bottom: 6px; }
   .step p { color: var(--muted); font-size: .92rem; }
@@ -322,8 +318,7 @@
   .pm-menu button { width: 100%; text-align: left; font: inherit; font-size: .9rem; padding: 10px 12px; border-radius: 9px; border: 0; background: none; cursor: pointer; color: #fff; }
   .pm-menu button:hover { background: rgba(255,255,255,.1); }
 
-  .contact { position: relative; isolation: isolate; text-align: center; }
-  #work { position: relative; isolation: isolate; }
+  .contact { text-align: center; }
   .contact .h2 { max-width: none; margin-inline: auto; text-wrap: balance;
     font-family: "Great Vibes", "Marck Script", "Snell Roundhand", "Apple Chancery", cursive;
     font-weight: 400; font-size: clamp(2.3rem, 5vw, 4.4rem); line-height: 1.15; letter-spacing: 0; }
@@ -400,7 +395,7 @@
     .ccopy:active { transform: scale(.95); }
   }
 
-  footer { border-top: 1px solid var(--line); padding: 28px 0 36px; color: var(--muted); font-size: .85rem; }
+  footer { border-top: 1px solid var(--line); padding: 28px 0 36px; color: var(--text); font-size: .85rem; }
   footer .wrap { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
 
   .toast {
@@ -545,8 +540,6 @@
   <!-- ===== ГЛАВНАЯ ===== -->
   <section id="top" class="hero">
     <div class="spot" aria-hidden="true"></div>
-    <div class="color-spot" aria-hidden="true"></div>
-    <div class="color-spot spot-dark" aria-hidden="true"></div>
     <div class="wrap">
       <p class="kicker" data-i18n="hero.kicker">InMorpho Studio</p>
       <h1 class="name"><span data-i18n="name.first">Nadina</span> <span data-i18n="name.last">Shirina</span></h1>
@@ -561,7 +554,6 @@
        <video src="..." autoplay muted loop playsinline></video>
        Тексты проектов правятся в словаре внизу файла (ключи case1..case5). -->
   <section id="work">
-    <div class="color-spot" aria-hidden="true"></div>
     <div class="wrap">
       <h2 class="h2" data-split="rise" data-i18n="work.title">Stories</h2>
       <div class="cat-filters" id="catFilters" data-reveal role="group" aria-label="Filter by category"></div>
@@ -576,7 +568,7 @@
       <h2 class="h2" data-split="rise" data-i18n="process.title">How I work</h2>
       <p class="sub" data-reveal data-i18n="process.sub"></p>
       <div class="steps" data-reveal style="--d:.1s">
-        <div class="step"><span class="step-num">01</span><h3 data-i18n="process.1t">Brief</h3><p data-i18n="process.1d"></p></div>
+        <a class="step step-link" href="#" id="briefStepLink" target="_blank" rel="noopener"><span class="step-num">01</span><h3 data-i18n="process.1t">Brief</h3><p data-i18n="process.1d"></p><svg class="step-arr" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M8 7h9v9"/></svg></a>
         <div class="step-arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg></div>
         <div class="step"><span class="step-num">02</span><h3 data-i18n="process.2t">Call</h3><p data-i18n="process.2d"></p></div>
         <div class="step-arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg></div>
@@ -591,7 +583,6 @@
 
   <!-- ===== ОБО МНЕ ===== -->
   <section id="about">
-    <div class="color-spot" aria-hidden="true"></div>
     <div class="wrap">
       <h2 class="h2" data-split="rise" data-i18n="about.title">About</h2>
       <p class="lead" data-split="light" data-i18n="about.lead">I make short films for fashion and lifestyle brands.</p>
@@ -626,14 +617,11 @@
 
   <!-- ===== КОНТАКТЫ ===== -->
   <section id="contact" class="contact">
-    <div class="color-spot" aria-hidden="true"></div>
     <div class="wrap">
       <h2 class="h2" data-split="rise" data-i18n="contact.title">Every brand has its own story. Let's create yours.</h2>
       <p class="sub" data-reveal><span data-i18n="contact.sub"></span> <a class="sub-arrow" href="#" id="briefLink" target="_blank" rel="noopener" aria-label="Send the brief"><svg class="ico ico-img" viewBox="0 0 24 24" aria-hidden="true"><rect width="24" height="24" rx="5.3" fill="#000"/><g transform="translate(12 12) scale(.62) translate(-12 -12)" fill="none" stroke="#fff" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="3" width="14" height="18" rx="2.2"/><circle cx="8.3" cy="8.6" r=".9"/><path d="M11.3 8.6h5.2"/><circle cx="8.3" cy="12.6" r=".9"/><path d="M11.3 12.6h5.2"/><circle cx="8.3" cy="16.6" r=".9"/><path d="M11.3 16.6h3.4"/></g></svg></a></p>
 
       <div class="cline" data-reveal style="--d:.1s">
-        <!-- ПРАЙС: ссылка задаётся в PRICE_URL в скрипте -->
-        <a class="citem" href="#" id="priceLink" aria-label="Pricing"><svg class="ico ico-img" viewBox="0 0 24 24" aria-hidden="true"><rect width="24" height="24" rx="5.3" fill="#000"/><g transform="translate(12 12) scale(.62) translate(-12 -12)" fill="none" stroke="#fff" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 12.2V4.8A1.3 1.3 0 0 1 4.8 3.5h7.4a1.3 1.3 0 0 1 .9.4l7.5 7.5a1.3 1.3 0 0 1 0 1.8l-7.4 7.4a1.3 1.3 0 0 1-1.8 0l-7.5-7.5a1.3 1.3 0 0 1-.4-.9z"/><circle cx="8.3" cy="8.3" r="1.4"/></g></svg><span data-i18n="contact.price">Pricing on request</span><svg class="arr" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M8 7h9v9"/></svg></a>
         <a class="citem" href="mailto:nadina@inmorphostudio.com" target="_blank" rel="noopener" id="mailLink" aria-label="Email"><svg class="ico ico-img" viewBox="0 0 24 24" aria-hidden="true"><rect width="24" height="24" rx="5.3" fill="#000"/><g transform="translate(12 12) scale(.62) translate(-12 -12)" fill="none" stroke="#fff" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2.5"/><path d="M3.5 6.5l8.5 6.5 8.5-6.5"/></g></svg><span>nadina@inmorphostudio.com</span><svg class="arr" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M8 7h9v9"/></svg></a>
         <a class="citem" href="https://instagram.com/inmorpho_ai" target="_blank" rel="noopener" aria-label="Instagram"><img class="ico ico-img" src="data:image/png;base64,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" alt="" width="18" height="18"><span>@inmorpho_ai</span><svg class="arr" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M8 7h9v9"/></svg></a>
         <a class="citem" href="https://www.upwork.com/freelancers/~0102cf12bec7f02bb0" target="_blank" rel="noopener" id="upwork" aria-label="Upwork"><img class="ico ico-img" src="data:image/png;base64,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" alt="" width="18" height="18"><span data-i18n="contact.upworkVal">Nadina S.</span><svg class="arr" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M8 7h9v9"/></svg></a>
@@ -1002,7 +990,7 @@ const dict = {
     "case5.type": "AI-хоумстейджинг", "case5.title": "Название проекта",
     "contact.title": "У каждого бренда своя история. Создадим вашу.",
     "contact.sub": "Расскажите о бренде и задаче, а я предложу идею и формат.",
-    "contact.write": "Написать мне", "contact.copy": "Копировать", "contact.copied": "Адрес скопирован", "contact.price": "Прайс по запросу", "contact.priceReady": "Прайс", "sheet.title": "Написать на почту", "sheet.app": "Почтовое приложение", "sheet.copy": "Скопировать адрес", "sheet.cancel": "Отмена", "contact.mailHint": "Адрес скопирован. Если почта не открылась, вставьте его в новое письмо.",
+    "contact.write": "Написать мне", "contact.copy": "Копировать", "contact.copied": "Адрес скопирован", "sheet.title": "Написать на почту", "sheet.app": "Почтовое приложение", "sheet.copy": "Скопировать адрес", "sheet.cancel": "Отмена", "contact.mailHint": "Адрес скопирован. Если почта не открылась, вставьте его в новое письмо.",
     "contact.upworkVal": "Nadina S."
   },
   en: {
@@ -1045,7 +1033,7 @@ const dict = {
     "case5.type": "AI home staging", "case5.title": "Project title",
     "contact.title": "Every brand has its own story. Let's create yours.",
     "contact.sub": "Tell me about your brand and the task. I'll come back with an idea and a format.",
-    "contact.write": "Write to me", "contact.copy": "Copy", "contact.copied": "Address copied", "contact.price": "Pricing on request", "contact.priceReady": "Pricing", "sheet.title": "Write an email", "sheet.app": "Mail app", "sheet.copy": "Copy address", "sheet.cancel": "Cancel", "contact.mailHint": "Address copied. If your mail app didn't open, paste it into a new email.",
+    "contact.write": "Write to me", "contact.copy": "Copy", "contact.copied": "Address copied", "sheet.title": "Write an email", "sheet.app": "Mail app", "sheet.copy": "Copy address", "sheet.cancel": "Cancel", "contact.mailHint": "Address copied. If your mail app didn't open, paste it into a new email.",
     "contact.upworkVal": "Nadina S."
   }
 };
@@ -1240,27 +1228,21 @@ document.getElementById("sheetCopy").addEventListener("click", async () => {
   catch (e) { showToast(mail); }
   closeSheet();
 });
-/* ===== ПРАЙС: вставь ссылку на PDF или страницу, когда будет готов ===== */
-const PRICE_URL = "";
-const priceLink = document.getElementById("priceLink");
-if (PRICE_URL) {
-  priceLink.href = PRICE_URL; priceLink.target = "_blank"; priceLink.rel = "noopener";
-  priceLink.querySelector("span").dataset.i18n = "contact.priceReady";
-} else {
-  priceLink.addEventListener("click", e => { e.preventDefault(); openSheet(); });
-}
 const up = document.getElementById("upwork");
 if (up.getAttribute("href") === "#") { up.classList.add("soon"); up.setAttribute("aria-disabled","true"); up.tabIndex = -1; }
 
 /* ===== БРИФ: вставь ссылку на Google Drive / форму, когда будет готова ===== */
 const BRIEF_URL = "https://forms.gle/ibLFoR94RvxuoLFw8";
-const briefLink = document.getElementById("briefLink");
-if (BRIEF_URL) {
-  briefLink.href = BRIEF_URL;
-} else {
-  briefLink.removeAttribute("target"); briefLink.removeAttribute("rel");
-  briefLink.addEventListener("click", e => e.preventDefault());
-}
+["briefLink", "briefStepLink"].forEach(id => {
+  const el = document.getElementById(id);
+  if (!el) return;
+  if (BRIEF_URL) {
+    el.href = BRIEF_URL;
+  } else {
+    el.removeAttribute("target"); el.removeAttribute("rel");
+    el.addEventListener("click", e => e.preventDefault());
+  }
+});
 
 /* ===== Старт ===== */
 let saved = null;
