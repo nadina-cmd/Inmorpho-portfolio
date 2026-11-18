@@ -691,9 +691,15 @@ const projects = [
     category: "storytelling", badge: "personal", media: "", video: "le-smoking", cover: "le-smoking-cover", ratio: "4 / 3", tone: "rgba(200,200,200,.22)",
     tools: ["Midjourney", "Nano Banana", "GPT Image", "Seedance 2.5", "Kling"],
     ru: { title: "Le Smoking", format: "Историческая короткометражка, 1 минута",
-          desc: "Нью-Йорк, конец шестидесятых. Нэн Кемпнер не пускают в ресторан La Côte Basque в брючном смокинге Yves Saint Laurent, и она возвращается в одном жакете, надетом как мини-платье. Кинематографичная история бренда, где характер Le Smoking виден за одну минуту." },
+          desc: "Нью-Йорк, конец шестидесятых. Нэн Кемпнер не пускают в ресторан La Côte Basque в брючном смокинге Yves Saint Laurent, и она возвращается в одном жакете, надетом как мини-платье.",
+          task: "рассказать историю одной вещи за минуту так, чтобы зритель понял, почему она изменила моду.",
+          role: "концепция, сценарий, режиссура, генерация, монтаж.",
+          footnote: "Некоммерческий проект. Выполнен в учебных целях, без заказа бренда." },
     en: { title: "Le Smoking", format: "Fashion history short, 1 minute",
-          desc: "New York, the late sixties. Nan Kempner is turned away from La Côte Basque for wearing Yves Saint Laurent's tuxedo trousers, so she returns in the jacket alone, worn as a mini dress. A cinematic brand story where the character of Le Smoking is clear within a minute." }
+          desc: "New York, the late sixties. Nan Kempner is turned away from La Côte Basque for wearing Yves Saint Laurent’s tuxedo trousers, so she returns in the jacket alone, worn as a mini dress.",
+          task: "tell the story of one garment in a minute, so the viewer understands why it changed fashion.",
+          role: "concept, script, direction, generation, editing.",
+          footnote: "Non-commercial project. Made for educational purposes, not commissioned by the brand." }
   },
   {
     id: "agmes",
@@ -701,56 +707,92 @@ const projects = [
     series: [{ id: "agmes-heart", name: "Heart" }, { id: "agmes-bracelets", name: "Bracelets" }, { id: "agmes-earrings", name: "Earrings" }], tone: "rgba(217,196,163,.32)",
     tools: ["Midjourney", "Nano Banana", "GPT Image", "Seedance 2.0", "Kling"],
     ru: { title: "AGMES", format: "Серия видео для бренда",
-          desc: "У AGMES лаконичные скульптурные формы, будто обточенные природой. Я перенесла их в пустыню, где песок, вода и свет повторяют линии украшений, а тишина оставляет взгляд наедине с деталью. Три части показывают браслеты, подвеску-сердце и серьги. Серия сделана по собственной инициативе как питч бренду." },
+          desc: "У AGMES лаконичные скульптурные формы, будто обточенные природой. Я перенесла их в пустыню, где песок, вода и свет повторяют линии украшений, а тишина оставляет взгляд наедине с деталью. Три части показывают браслеты, подвеску-сердце и серьги.",
+          task: "показать характер бренда через форму украшений, а не через предметную съёмку.",
+          role: "концепция, сценарий, режиссура, генерация, монтаж.",
+          footnote: "Спек-проект по собственной инициативе, сделан как питч бренду. Не заказан AGMES." },
     en: { title: "AGMES", format: "Brand video series",
-          desc: "AGMES works with spare sculptural forms that look shaped by nature. I placed them in a desert, where sand, water and light echo the lines of the pieces and the silence leaves the eye alone with the detail. Three parts show the bracelets, the heart pendant and the earrings. Self-initiated series made as a pitch to the brand." }
+          desc: "AGMES works with spare sculptural forms that look shaped by nature. I placed them in a desert, where sand, water and light echo the lines of the pieces and the silence leaves the eye alone with the detail. Three parts show the bracelets, the heart pendant and the earrings.",
+          task: "show the brand’s character through its forms, not through product shots.",
+          role: "concept, script, direction, generation, editing.",
+          footnote: "Self-initiated spec project, made as a pitch to the brand. Not commissioned by AGMES." }
   },
   {
-    id: "mushrooms",
+    id: "mushrooms", taskKind: "idea",
     category: "creative", badge: "personal", media: "", video: "mushrooms", tone: "rgba(150,150,140,.28)",
     tools: ["Midjourney", "Nano Banana", "Kling"],
     ru: { title: "Mushrooms", format: "Арт-ролик о природе и украшениях, 36 секунд",
-          desc: "Лес из гигантских зонтичных деревьев становится прообразом украшения. Героиня идёт через этот лес к морю, а в финале — крупный план подвески с жемчугом, повторяющей линии кроны.<br><br>Идея ролика в том, что украшения рождаются из наблюдения за природой." },
+          desc: "Лес из гигантских деревьев в форме грибов становится прообразом украшения. Героиня идёт через этот лес к морю, а в финале — крупный план подвески с жемчугом, повторяющей линии кроны.",
+          task: "украшения могут рождаться из наблюдения за природой.",
+          role: "концепция, сценарий, режиссура, генерация, монтаж.",
+          footnote: "Авторский проект. Выполнен в учебных целях." },
     en: { title: "Mushrooms", format: "Art film about nature and jewelry, 36 seconds",
-          desc: "A forest of giant umbrella-shaped trees becomes the blueprint for a piece of jewelry. She walks through the forest toward the sea, and the film closes on a pearl pendant that echoes the lines of the canopy.<br><br>The idea behind the film: jewelry design can start with watching nature." }
+          desc: "A forest of giant mushroom-shaped trees becomes the blueprint for a piece of jewelry. She walks through the forest toward the sea, and the film closes on a pearl pendant that echoes the lines of the canopy.",
+          task: "jewelry design can start with watching nature.",
+          role: "concept, script, direction, generation, editing.",
+          footnote: "Personal project. Made for educational purposes." }
   },
   {
     id: "splendid",
-    category: "brand", badge: "spec", media: "", video: "hotel-splendid", ratio: "3 / 2", tone: "rgba(120,150,160,.28)",
+    category: "brand", badge: "personal", media: "", video: "hotel-splendid", ratio: "3 / 2", tone: "rgba(120,150,160,.28)",
     tools: ["Nano Banana", "GPT Image", "Kling"],
     ru: { title: "Splendid Conference & SPA Resort", format: "Атмосферный бренд-фильм, 14 секунд",
-          desc: "Спек-проект к 20-летию Splendid Conference & SPA Resort. Атмосферная история в реальном лобби ресторана отеля с сгенерированными персонажами в кадре. Каждый год здесь рождается множество историй. Это одна из них." },
+          desc: "Фильм к 20-летию отеля. Я сняла настоящее лобби ресторана отеля и оживила его AI-персонажами, сохранив интерьер таким, какой он есть. Каждый год здесь рождается множество историй. Это одна из них.",
+          task: "показать настоящее пространство отеля живым — без съёмочной группы и без единого изменения в интерьере.",
+          role: "съёмка локации, концепция, сценарий, режиссура, генерация, монтаж.",
+          footnote: "Авторский проект к юбилею отеля. Не заказан брендом." },
     en: { title: "Splendid Conference & SPA Resort", format: "Atmospheric brand film, 14 seconds",
-          desc: "A spec project for Splendid Conference & SPA Resort's 20th anniversary. An atmospheric story shot in the hotel's real restaurant lobby, featuring AI-generated characters. Countless stories unfold here every year. This is one of them." }
+          desc: "A film for the resort’s 20th anniversary. I photographed the hotel’s real restaurant lobby and brought it to life with AI-generated characters, keeping the interior exactly as it is. Countless stories unfold here every year. This is one of them.",
+          task: "show a real hotel space alive, without a film crew and without changing a single detail of the interior.",
+          role: "location photography, concept, script, direction, generation, editing.",
+          footnote: "Personal project made for the resort’s anniversary. Not commissioned by the brand." }
   },
   {
     id: "pomegranate",
-    category: "brand", badge: "personal", media: "", video: "pomegranate", cover: "pomegranate-cover", ratio: "9 / 16", vertical: true, tone: "rgba(160,40,50,.3)",
+    category: "creative", badge: "personal", media: "", video: "pomegranate", cover: "pomegranate-cover", ratio: "9 / 16", vertical: true, tone: "rgba(160,40,50,.3)",
     tools: ["Midjourney", "Nano Banana", "Kling"],
     ru: { title: "Pomegranate", format: "Визуальный этюд, 36 секунд",
-          desc: "Бархат, гранат и красное вино. Этюд о чувственности, рассказанный через фактуры и крупные детали. Настроение здесь важнее сюжета." },
+          desc: "Бархат, гранат и красное вино. Этюд о чувственности, рассказанный через фактуры и крупные детали. Настроение здесь важнее сюжета.",
+          task: "создать ощущение через одну лишь фактуру — так, как парфюмерные, винные и фешн-бренды говорят на языке чувств.",
+          role: "концепция, арт-дирекшн, генерация, монтаж.",
+          footnote: "Авторский проект. Выполнен в учебных целях." },
     en: { title: "Pomegranate", format: "Visual study, 36 seconds",
-          desc: "Velvet, pomegranate and red wine. A study of sensuality told through texture and close detail. Mood matters more here than plot." }
+          desc: "Velvet, pomegranate and red wine. A study of sensuality told through texture and close detail. Mood matters more here than plot.",
+          task: "create a feeling through texture alone, the way fragrance, wine and fashion brands speak to the senses.",
+          role: "concept, art direction, generation, editing.",
+          footnote: "Personal project. Made for educational purposes." }
   },
   {
     id: "miumiu",
-    category: "brand", badge: "spec", media: "", video: "miumiu", coverImg: "miumiu-cover", ratio: "9 / 16", vertical: true, flip: true, tone: "rgba(190,40,40,.3)",
+    category: "brand", badge: "personal", media: "", video: "miumiu", coverImg: "miumiu-cover", ratio: "9 / 16", vertical: true, flip: true, tone: "rgba(190,40,40,.3)",
     tools: ["Midjourney", "Nano Banana", "Kling"],
     ru: { title: "Miu Miu", format: "Бэкстейдж, 26 секунд",
-          desc: "Мой эксперимент с форматом. Закулисье съёмки, которой не было. Эскалаторы метро, свет, камера и финальный образ в красном кружеве и очках Miu Miu. Съёмочную группу я тоже создала в нейросетях." },
+          desc: "Закулисье съёмки, которой не было: эскалаторы метро, свет, камера и финальный образ в красном кружеве и очках Miu Miu. Съёмочную группу я тоже создала в нейросетях.",
+          task: "воссоздать ощущение настоящего фешн-бэкстейджа — контента, который бренды публикуют вокруг каждой кампании, — без реальной съёмки.",
+          role: "концепция, арт-дирекшн, генерация, монтаж.",
+          footnote: "Авторский проект. Выполнен в учебных целях, без заказа бренда." },
     en: { title: "Miu Miu", format: "AI backstage, 26 seconds",
-          desc: "My experiment with the format. Behind the scenes of a shoot that never happened, with subway escalators, lighting, camera and the final look in red lace and Miu Miu glasses. The film crew was generated too." }
+          desc: "Behind the scenes of a shoot that never happened: subway escalators, lighting, camera and the final look in red lace and Miu Miu glasses. The film crew was generated too.",
+          task: "recreate the feeling of a real fashion backstage, the content brands publish around every campaign, without a shoot.",
+          role: "concept, art direction, generation, editing.",
+          footnote: "Personal project. Made for educational purposes, not commissioned by the brand." }
   },
   {
     id: "rosalia",
-    category: "photo", badge: "spec", media: "",
+    category: "photo", badge: "personal", media: "",
     photos: ["rosalia-1-ballerina.webp", "rosalia-2-mic-portrait.webp", "rosalia-3-black-dress-arms.jpg", "rosalia-4-floor.webp", "rosalia-5-feather-headpiece.webp", "rosalia-6-flying-feathers-portrait.jpg", "rosalia-7-flying-feathers-full.webp"],
     ratio: "4 / 5", tone: "rgba(120,120,130,.28)",
     tools: ["Midjourney"],
     ru: { title: "Rosalía", format: "AI-фотосессия по мотивам тура LUX, 7 кадров",
-          desc: "Альбом LUX Росалии — путь от земного к небесному через веру и трансформацию. Я взяла свет как главный инструмент серии.<br><br>Все кадры полностью созданы в нейросетях. Это моя авторская интерпретация и благодарность за музыку, которую хочется видеть." },
+          desc: "Альбом LUX Росалии — путь от земного к небесному через веру и трансформацию. В серии этот путь несёт свет: он нарастает от кадра к кадру, пока не захватывает весь образ.<br><br>Все кадры полностью созданы в нейросетях. Это моя авторская интерпретация и благодарность за музыку, которую хочется видеть.",
+          task: "перевести идею альбома в серию кадров, которая держит единый стиль от начала до конца.",
+          role: "концепция, арт-дирекшн, генерация, ретушь.",
+          footnote: "Авторский проект. Выполнен в учебных целях, не связан с артисткой." },
     en: { title: "Rosalía", format: "AI photoshoot inspired by the LUX tour, 7 frames",
-          desc: "Rosalía's LUX album traces a journey from the earthly to the celestial, through faith and transformation. I used light as the series' core tool.<br><br>Every frame is fully AI-generated. This is my own interpretation, a thank-you for music that asks to be seen." }
+          desc: "Rosalía’s LUX album traces a journey from the earthly to the celestial, through faith and transformation. In the series, light carries that journey: it grows from frame to frame until it takes over the image.<br><br>Every frame is fully AI-generated. This is my own interpretation, a thank-you for music that asks to be seen.",
+          task: "translate the idea of an album into a visual series that keeps one style across every frame.",
+          role: "concept, art direction, generation, retouching.",
+          footnote: "Personal project. Made for educational purposes, not affiliated with the artist." }
   }
 ];
 const categories = {
@@ -867,6 +909,10 @@ function renderModalContent(p) {
   const tools = p.tools.length
     ? `<p class="tools-label">${dict[lang]["case.tools"]}</p><ul class="tools">${p.tools.map(x => `<li>${x}</li>`).join("")}</ul>` : "";
   const badgeTag = p.badge && badges[p.badge] ? `<span class="pv-disclaimer-tag">${badges[p.badge][lang]}</span>` : "";
+  const taskLabel = dict[lang][p.taskKind === "idea" ? "case.idea" : "case.task"];
+  const taskLine = t.task ? `<p class="case-desc" style="margin-top:10px"><strong>${taskLabel}</strong> ${t.task}</p>` : "";
+  const roleLine = t.role ? `<p class="case-desc" style="margin-top:10px"><strong>${dict[lang]["case.role"]}</strong> ${t.role}</p>` : "";
+  const footnote = t.footnote || dict[lang]["case.disclaimer"];
   pmCaption.innerHTML = `<span class="pv-title">${t.title}</span><span class="pv-format">${t.format}</span><span class="pv-tags">${badgeTag}<span class="pv-disclaimer-tag">${dict[lang]["case.disclaimer.short"]}</span></span>`;
   pmInfo.innerHTML = `
     <div class="pv-info-top">
@@ -882,8 +928,10 @@ function renderModalContent(p) {
     <h3 class="case-title">${t.title}</h3>
     <p class="case-format">${t.format}</p>
     <p class="case-desc" style="margin-top:14px">${t.desc}</p>
+    ${taskLine}
+    ${roleLine}
     ${tools}
-    <p class="case-disclaimer">${dict[lang]["case.disclaimer"]}</p>`;
+    <p class="case-disclaimer">${footnote}</p>`;
   pmMenuEl = document.getElementById("pmMenu");
   document.getElementById("pmShare").addEventListener("click", () => pmMenuEl.classList.toggle("open"));
   document.getElementById("pmShareAction").addEventListener("click", () => { shareLink(); closeMenu(); });
@@ -983,6 +1031,7 @@ const dict = {
     "case.ph": "Кадр проекта", "case.hint": "16:9, JPG, PNG или MP4",
     "case.desc": "Одна-две строки о задаче и результате: для кого, что нужно было показать, что получилось.",
     "case.tools": "Инструменты", "case.watch": "Смотреть со звуком", "case.toolsVal": "укажите нейросети и софт",
+    "case.task": "Задача:", "case.idea": "Идея:", "case.role": "Моя роль:",
     "case1.type": "Бренд-фильм", "case1.title": "Название проекта",
     "case2.type": "Fashion-editorial", "case2.title": "Название проекта",
     "case3.type": "Короткометражка", "case3.title": "Название проекта",
@@ -1026,6 +1075,7 @@ const dict = {
     "case.ph": "Project still", "case.hint": "16:9, JPG, PNG or MP4",
     "case.desc": "One or two lines on the brief and the result: who it was for, what had to be shown, what came out.",
     "case.tools": "Tools", "case.watch": "Watch with sound", "case.toolsVal": "list the models and software",
+    "case.task": "The task:", "case.idea": "The idea:", "case.role": "My role:",
     "case1.type": "Brand film", "case1.title": "Project title",
     "case2.type": "Fashion editorial", "case2.title": "Project title",
     "case3.type": "Short film", "case3.title": "Project title",
